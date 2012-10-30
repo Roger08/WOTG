@@ -1,6 +1,7 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
 Imports System.IO
+Imports WOTG.Format.Structures
 
 Module ModVariables
 
@@ -10,6 +11,10 @@ Module ModVariables
 
     ' - Variables reseau
     Public _Socket As Socket
+
+    ' - Variables de structures
+    Public Joueur() As JoueurRec
+    Public JoueurTemp() As JoueurTempRec
 
     ' - Variables diverses
     Public VersionClient As String = "0.0.1"
