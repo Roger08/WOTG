@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Modules\ModBDD.vb" />
     <Compile Include="Modules\ModConsoleText.vb" />
+    <Compile Include="Modules\ModFonctions.vb" />
     <Compile Include="Programme.vb" />
     <Compile Include="Modules\ModEnum.vb" />
     <Compile Include="Modules\ModReseau.vb" />

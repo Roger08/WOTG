@@ -1,6 +1,6 @@
 ﻿Imports System.Net.Sockets
 Imports System.IO
-Imports System.Threading
+Imports System.Threading.Tasks
 
 Public Class Structures
 
@@ -24,10 +24,10 @@ Public Class Structures
     End Structure
 
     Public Structure JoueurTempRec
-        Dim Socket As TcpClient
+        Dim Socket As Socket
         Dim Flux As NetworkStream
-        Dim Thread As Thread
-        Dim TempIP As String
+        Dim Thread As Task
+        Dim IP As String
         Dim Connecte As Boolean
         Dim EnJeu As Boolean
     End Structure
@@ -124,19 +124,19 @@ Public Class Structures
         Dim AttributInt3 As Integer
         Dim AttributString1 As String
         Dim AttributString2 As String
-        Dim SolSet As String
+        Dim SolSet As Byte
         Dim Sol As Long
-        Dim Inf1Set As String
+        Dim Inf1Set As Byte
         Dim Inf1 As Long
-        Dim Inf2Set As String
+        Dim Inf2Set As Byte
         Dim Inf2 As Long
-        Dim Inf3Set As String
+        Dim Inf3Set As Byte
         Dim Inf3 As Long
-        Dim Sup1Set As String
+        Dim Sup1Set As Byte
         Dim Sup1 As Long
-        Dim Sup2Set As String
+        Dim Sup2Set As Byte
         Dim Sup2 As Long
-        Dim Sup3Set As String
+        Dim Sup3Set As Byte
         Dim Sup3 As Long
     End Structure
 

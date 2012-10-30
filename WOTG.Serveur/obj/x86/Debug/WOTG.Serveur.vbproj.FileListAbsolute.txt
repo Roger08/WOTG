@@ -11,3 +11,16 @@ C:\Users\Hugo\documents\visual studio 2010\Projects\WOTG\WOTG.Serveur\obj\x86\De
 C:\Users\Hugo\documents\visual studio 2010\Projects\WOTG\WOTG.Serveur\bin\Debug\WOTG.Format.dll
 C:\Users\Hugo\documents\visual studio 2010\Projects\WOTG\WOTG.Serveur\bin\Debug\WOTG.Format.pdb
 C:\Users\Hugo\documents\visual studio 2010\Projects\WOTG\WOTG.Serveur\bin\Debug\WOTG.Format.xml
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\obj\x86\Debug\WOTG.Serveur.exe
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\obj\x86\Debug\WOTG.Serveur.xml
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\obj\x86\Debug\WOTG.Serveur.pdb
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\bin\Debug\WOTG.Serveur.exe
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\bin\Debug\WOTG.Serveur.pdb
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\bin\Debug\WOTG.Serveur.xml
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\bin\Debug\WOTG.Format.dll
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\bin\Debug\WOTG.Format.pdb
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\bin\Debug\WOTG.Format.xml
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\obj\x86\Debug\WOTG.Serveur.Resources.resources
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Serveur\obj\x86\Debug\GenerateResource.write.1.tlog
