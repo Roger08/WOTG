@@ -8,7 +8,7 @@
     Public Function TrouverSlotOuvert() As Byte
         Dim temp As Byte
 
-        For i = 0 To MAX_JOUEURS
+        For i = 1 To MAX_JOUEURS
             If Not JoueurTemp(i).Connecte Then
                 temp = i
                 Exit For

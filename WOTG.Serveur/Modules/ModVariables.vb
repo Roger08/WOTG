@@ -2,6 +2,7 @@
 Imports System.Net.Sockets
 Imports System.IO
 Imports WOTG.Format.Structures
+Imports System.Collections
 
 Module ModVariables
 
@@ -16,10 +17,12 @@ Module ModVariables
     Public SEP As Char = Chr(0)
     Public FIN As Char = Chr(237)
     Public ListeIndex As New ArrayList
+    Public PaquetHandler As New Dictionary(Of Byte, Action)
+    Public PaquetData As New ArrayList
 
     ' - Variables de structures
-    Public Joueur(MAX_JOUEURS) As JoueurRec
-    Public JoueurTemp(MAX_JOUEURS) As JoueurTempRec
+    Public Joueur() As JoueurRec
+    Public JoueurTemp() As JoueurTempRec
 
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250

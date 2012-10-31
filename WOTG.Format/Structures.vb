@@ -1,6 +1,6 @@
 ﻿Imports System.Net.Sockets
 Imports System.IO
-Imports System.Threading.Tasks
+Imports System.Threading
 
 Public Class Structures
 
@@ -26,7 +26,7 @@ Public Class Structures
     Public Structure JoueurTempRec
         Dim Socket As Socket
         Dim Flux As NetworkStream
-        Dim Thread As Task
+        Dim Thread As Thread
         Dim IP As String
         Dim Connecte As Boolean
         Dim EnJeu As Boolean
