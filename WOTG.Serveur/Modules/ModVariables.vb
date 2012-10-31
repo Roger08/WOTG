@@ -14,8 +14,10 @@ Module ModVariables
     Public _Socket As Socket
     Public Port As Integer = 2556
     Public IndexActuel As Byte
-    Public SEP As Char = Chr(0)
-    Public FIN As Char = Chr(237)
+    'Public SEP As Char = Chr(0)
+    'Public FIN As Char = Chr(237)
+    Public SEP As String = "/"
+    Public FIN As String = "K"
     Public ListeIndex As New ArrayList
     Public PaquetHandler As New Dictionary(Of Byte, Action)
     Public PaquetData As New ArrayList

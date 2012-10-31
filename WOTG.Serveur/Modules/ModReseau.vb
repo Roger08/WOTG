@@ -11,6 +11,9 @@ Module ModReseau
 
     ' - Initialisation du protocole réseau
     Public Sub Init()
+        ' Initialisation des paquets
+        Call InitPaquets()
+
         ' Initialisation du socket
         _Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
         _Socket.Bind(New IPEndPoint(IPAddress.Any, Port))
@@ -23,11 +26,9 @@ Module ModReseau
 
     ' - Initialisation des différents paquets provenant du client
     Public Sub InitPaquets()
-        PaquetHandler.Add(0, AddressOf test)
+
     End Sub
-    Sub test()
-        Console.WriteLine(PaquetData(0))
-    End Sub
+
     ' - Accepte un client de manière asynchrone
     Public Sub AccepterClient(ByVal IR As IAsyncResult)
         Try
@@ -95,17 +96,13 @@ Module ModReseau
                     ReDim PaquetByte(.Socket.Available) ' Défini la taille du paquet
                     .Flux.Read(PaquetByte, 0, PaquetByte.Length) ' Lecture du paquet
                     PaquetString = ASCIIEncoding.UTF8.GetString(PaquetByte) ' Convertion du paquet
-                    Paquet = PaquetString.Split(FIN) ' Découpe du paquet
+                    Paquet = PaquetString.Split(FIN) ' Découpe des paquets possiblement collés
 
                     ' - Boucle vérifiant que plusieurs paquet ne sont pas collés
                     For i = 0 To Paquet.Length - 2
                         ' - Traite le paquet
                         ' Met le paquet dans la file d'attente
-                        If Not PaquetData.Count = 0 Then
-                            PaquetData(PaquetData.Count - 1) = Paquet(i)
-                        Else
-                            PaquetData(0) = Paquet(i)
-                        End If
+                        PaquetData.Add(Paquet(i))
 
                         temp = Paquet(i).Split(SEP) ' Récupère l'entête
                         PaquetHandler(CByte(temp(0))).Invoke() ' Apelle la fonction correspondante au paquet
