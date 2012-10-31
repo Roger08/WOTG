@@ -111,4 +111,8 @@ Module ModReseau
             End While
         End With
     End Sub
+
+#Region "Actions enclanchées par des paquets entrants"
+
+#End Region
 End Module

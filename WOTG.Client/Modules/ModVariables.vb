@@ -12,8 +12,9 @@ Module ModVariables
 
     ' - Variables reseau
     Public _Socket As Socket
+    Public _Flux As NetworkStream
     Public Port As Integer = 2556
-    Public IndexActuel As Byte
+    Public MonIndex As Byte
     Public SEP As Char = Chr(0)
     Public FIN As Char = Chr(237)
     Public ListeIndex As New ArrayList
@@ -23,6 +24,14 @@ Module ModVariables
     ' - Variables de structures
     Public Joueur() As JoueurRec
     Public JoueurTemp() As JoueurTempRec
+    Public Map() As MapRec
+    Public Secteur() As SecteurRec
+    Public Objet() As ObjetRec
+    Public Sort() As SortRec
+    Public Quete() As QueteRec
+    Public PNJ() As PNJRec
+    Public Classe() As ClasseRec
+    Public Races() As RaceRec
 
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250
@@ -42,3 +51,4 @@ Module ModVariables
     Public VersionClient As String = "0.0.1"
     Public VersionServeur As String = "0.0.1"
 End Module
+
