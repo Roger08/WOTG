@@ -7,6 +7,7 @@
 
         Call MOTD()
         Call Init()
+
         Console.Read()
     End Sub
 
