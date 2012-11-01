@@ -22,6 +22,7 @@ Module ModReseau
     ' - Connexion asynchrone au serveur
     Sub ConnectCallBack(ByVal IR As IAsyncResult)
         _Socket.EndConnect(IR)
+        _Flux = New NetworkStream(_Socket)
     End Sub
 
     ' - Initialisation des différents paquets provenant du serveur
@@ -88,4 +89,25 @@ Module ModReseau
             End While
         End With
     End Sub
+
+#Region "Actions enclanchées par les paquets entrants"
+
+#End Region
+
+#Region "Actions necessitant des paquets"
+
+    ' - Envoi de la connexion du client
+    Public Sub Connexion(ByVal Pseudo As String, ByVal MotDePasse As String)
+        If Not Pseudo.Length < 3 Then
+            If Not MotDePasse.Length < 3 Then
+                Call EnvoyerPaquet(PaquetClient.Connexion & SEP & VersionClient & SEP & Pseudo & SEP & MotDePasse & SEP)
+            Else
+                MsgBox("Votre mot de passe doit faire au moins 3 carractères.", MsgBoxStyle.Critical, "Erreur")
+            End If
+        Else
+            MsgBox("Votre pseudo doit faire au moins 3 carractères.", MsgBoxStyle.Critical, "Erreur")
+        End If
+    End Sub
+
+#End Region
 End Module

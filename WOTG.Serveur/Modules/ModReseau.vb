@@ -26,7 +26,8 @@ Module ModReseau
 
     ' - Initialisation des différents paquets provenant du client
     Public Sub InitPaquets()
-
+        PaquetHandler.Add(PaquetClient.Connexion, AddressOf Connexion)
+        PaquetHandler.Add(PaquetClient.Inscription, AddressOf Inscription)
     End Sub
 
     ' - Accepte un client de manière asynchrone
@@ -144,6 +145,16 @@ Module ModReseau
     End Sub
 
 #Region "Actions enclanchées par des paquets entrants"
+
+    ' - Connexion d'un joueur
+    Public Sub Connexion()
+        Call Show("WOUHOU !!!")
+    End Sub
+
+    ' - Inscription d'un joueur
+    Public Sub Inscription()
+
+    End Sub
 
 #End Region
 End Module
