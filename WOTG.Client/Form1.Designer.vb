@@ -23,29 +23,50 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.txtPass = New System.Windows.Forms.TextBox()
+        Me.txtNom = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(135, 50)
+        Me.Button1.Location = New System.Drawing.Point(152, 417)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(168, 136)
+        Me.Button1.Size = New System.Drawing.Size(70, 25)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "Connexion"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'txtPass
+        '
+        Me.txtPass.Location = New System.Drawing.Point(12, 420)
+        Me.txtPass.Name = "txtPass"
+        Me.txtPass.Size = New System.Drawing.Size(121, 20)
+        Me.txtPass.TabIndex = 1
+        '
+        'txtNom
+        '
+        Me.txtNom.Location = New System.Drawing.Point(12, 394)
+        Me.txtNom.Name = "txtNom"
+        Me.txtNom.Size = New System.Drawing.Size(121, 20)
+        Me.txtNom.TabIndex = 2
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(533, 452)
+        Me.Controls.Add(Me.txtNom)
+        Me.Controls.Add(Me.txtPass)
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form1"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents txtPass As System.Windows.Forms.TextBox
+    Friend WithEvents txtNom As System.Windows.Forms.TextBox
 
 End Class

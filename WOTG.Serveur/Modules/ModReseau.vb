@@ -74,6 +74,37 @@ Module ModReseau
         End With
     End Sub
 
+    ' - Envoyer un paquet à tous les clients
+    Public Sub EnvoyerTousClients(ByVal Paquet As String)
+        For i = 0 To ListeIndex.Count - 1
+            Call EnvoyerPaquet(ListeIndex(i), Paquet)
+        Next
+    End Sub
+
+    ' - Envoyer un paquet à tous les joueurs
+    Public Sub EnvoyerTousJoueurs(ByVal Paquet As String)
+        For i = 0 To ListeIndex.Count - 1
+            If JoueurTemp(ListeIndex(i)).EnJeu Then
+                Call EnvoyerPaquet(ListeIndex(i), Paquet)
+            End If
+        Next
+    End Sub
+
+    ' - Envoyer un Paquet à un client
+    Public Sub EnvoyerPaquet(ByVal index As Byte, ByVal Paquet As String)
+        Dim PaquetByte() As Byte
+
+        If JoueurTemp(index).Connecte Then
+            Try
+                PaquetByte = ASCIIEncoding.UTF8.GetBytes(Paquet & FIN)
+                JoueurTemp(index).Flux.Write(PaquetByte, 0, PaquetByte.Length)
+                JoueurTemp(index).Flux.Flush()
+            Catch
+                Call Erreur("Erreur lors de l'envoie du paquet au client #" & index)
+            End Try
+        End If
+    End Sub
+
     ' - Récéption du paquet
     Public Sub RecevoirPaquets()
         Dim index As Byte = ListeIndex(ListeIndex.Count - 1)

@@ -14,8 +14,8 @@
         Console.ForegroundColor = ConsoleColor.DarkGray
     End Sub
 
-    Public Sub Fail(ByVal Message As String)
-        Console.ForegroundColor = ConsoleColor.red
+    Public Sub Erreur(ByVal Message As String)
+        Console.ForegroundColor = ConsoleColor.Red
         Console.WriteLine("ERROR : " & Message)
         Console.ForegroundColor = ConsoleColor.DarkGray
     End Sub

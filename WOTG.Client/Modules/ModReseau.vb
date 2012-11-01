@@ -24,7 +24,7 @@ Module ModReseau
         _Socket.EndConnect(IR)
     End Sub
 
-    ' - Initialisation des différents paquets provenant du client
+    ' - Initialisation des différents paquets provenant du serveur
     Public Sub InitPaquets()
 
     End Sub
@@ -34,6 +34,22 @@ Module ModReseau
         _Socket.Close()
         _Flux = Nothing
         _Flux.Dispose()
+    End Sub
+
+    ' - Envoi de paquet
+    Public Sub EnvoyerPaquet(ByVal Paquet As String)
+        Dim PaquetByte() As Byte
+
+        If _Socket.Connected Then
+            Try
+                PaquetByte = ASCIIEncoding.UTF8.GetBytes(Paquet & FIN)
+                _Flux.Write(PaquetByte, 0, PaquetByte.Length)
+                _Flux.Flush()
+            Catch
+                MsgBox("Erreur lors de l'envoi du paquet", MsgBoxStyle.Critical, "Erreur fatale")
+                End
+            End Try
+        End If
     End Sub
 
     ' - Récéption du paquet
