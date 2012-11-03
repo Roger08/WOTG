@@ -9,6 +9,11 @@
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Call Connexion("PSEU", "MDP")
+        Call Connexion(txtNom.Text, txtPass.Text)
+    End Sub
+
+    Private Sub Label3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label3.Click
+        ' TODO : Ouvrir la page d'inscription du site
+        Call EnvoyerPaquet(PaquetClient.Inscription & SEP & txtNom.Text & SEP & txtPass.Text & SEP)
     End Sub
 End Class

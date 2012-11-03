@@ -2,6 +2,7 @@
 Imports System.Net.Sockets
 Imports System.Threading
 Imports System.Text
+Imports System.IO
 
 Module ModReseau
 
@@ -40,7 +41,7 @@ Module ModReseau
                 .IP = (CType(.Socket.RemoteEndPoint, IPEndPoint).Address.ToString)
                 ListeIndex.Add(IndexActuel)
                 .Connecte = True
-                Call Info("Un client vient de se connecter sur le slot #" & IndexActuel & " depuis l'IP " & .IP & ".")
+                Call ShowConnexion("Un client vient de se connecter sur le slot #" & IndexActuel & " depuis l'IP " & .IP & ".")
                 .Flux = New NetworkStream(.Socket)
                 .Thread = New thread(AddressOf RecevoirPaquets)
                 .Thread.Start()
@@ -57,7 +58,7 @@ Module ModReseau
         ListeIndex.Remove(index)
 
         If Not Joueur(index).Nom = Nothing Then
-            Call ShowInfo(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se deconnecter")
+            Call ShowDeconnexion(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se deconnecter")
             ' TODO : Nettoyage des infos du joueur
         End If
 
@@ -66,7 +67,7 @@ Module ModReseau
         ' TODO : Afficher aux autres joueur la déconnexion
 
         With JoueurTemp(index)
-            Call Info("Client sur le slot #" & index & " vient de se deconnecter")
+            Call ShowDeconnexion("Client sur le slot #" & index & " vient de se deconnecter")
             .Socket.Close()
             .Connecte = False
             .EnJeu = False
@@ -134,7 +135,7 @@ Module ModReseau
                     For i = 0 To Paquet.Length - 2
                         ' - Traite le paquet
                         ' Met le paquet dans la file d'attente
-                        PaquetData.Add(Paquet(i))
+                        PaquetData.Add(index & SEP & Paquet(i))
 
                         temp = Paquet(i).Split(SEP) ' Récupère l'entête
                         PaquetHandler(CByte(temp(0))).Invoke() ' Apelle la fonction correspondante au paquet
@@ -148,12 +149,46 @@ Module ModReseau
 
     ' - Connexion d'un joueur
     Public Sub Connexion()
-        Call Show("WOUHOU !!!")
+        ' Récupère le corps du paquet
+        Dim Datas As String = PaquetData(0)
+        PaquetData.RemoveAt(0)
+        Dim Data() As String = Datas.Split(SEP)
+
+        If Data(2) = VersionClient Then ' vérifie la version du joueur
+            If File.Exists("Comptes/" & Data(3).ToLower & ".wotg") Then ' vérifie l'existance du joueur
+                Call ChargerJoueur(Data(0), Data(3)) ' charge le joueur
+                If Joueur(Data(0)).MotDePasse = Data(4) Then ' vérifie le mot de passe
+                    ' TODO : connecter le joueur
+                Else
+                    'TODO : Mauvais mot de passe
+                End If
+            Else
+                'TODO : Compte innexistant
+            End If
+        Else
+            'TODO : Mauvaise version
+        End If
     End Sub
 
     ' - Inscription d'un joueur
     Public Sub Inscription()
+        ' Récupère le corps du paquet
+        Dim Datas As String = PaquetData(0)
+        PaquetData.RemoveAt(0)
+        Dim Data() As String = Datas.Split(SEP)
 
+        If Not Data(2).Length < 3 Or Not Data(3).Length < 3 Then
+            If Not File.Exists("Comptes/" & Data(2).ToLower & ".wotg") Then
+                Joueur(Data(0)).Nom = Data(2)
+                Joueur(Data(0)).MotDePasse = Data(3)
+                Call SauvegarderJoueur(Data(0))
+                Call Info("Le compte " & Data(2) & " vient d'être créé")
+                Call ViderJoueur(Data(0))
+                ' TODO : Retourner la réussite de l'inscription
+            Else
+                ' TODO : Retourner que le compte existe déjà
+            End If
+        End If
     End Sub
 
 #End Region

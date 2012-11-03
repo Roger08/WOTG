@@ -25,6 +25,9 @@ Partial Class frmLogin
         Me.Button1 = New System.Windows.Forms.Button()
         Me.txtPass = New System.Windows.Forms.TextBox()
         Me.txtNom = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Button1
@@ -45,22 +48,54 @@ Partial Class frmLogin
         '
         'txtNom
         '
-        Me.txtNom.Location = New System.Drawing.Point(12, 394)
+        Me.txtNom.Location = New System.Drawing.Point(12, 381)
         Me.txtNom.Name = "txtNom"
         Me.txtNom.Size = New System.Drawing.Size(121, 20)
         Me.txtNom.TabIndex = 2
         '
-        'Form1
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 365)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(49, 13)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Pseudo :"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(12, 404)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(77, 13)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Mot de passe :"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(365, 429)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(156, 13)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Pas encore inscrit ? Cliquez ici !"
+        '
+        'frmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(533, 452)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtNom)
         Me.Controls.Add(Me.txtPass)
         Me.Controls.Add(Me.Button1)
-        Me.Name = "Form1"
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.Name = "frmLogin"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "Wrath Of The Gods - Connexion"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -68,5 +103,8 @@ Partial Class frmLogin
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents txtPass As System.Windows.Forms.TextBox
     Friend WithEvents txtNom As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 
 End Class

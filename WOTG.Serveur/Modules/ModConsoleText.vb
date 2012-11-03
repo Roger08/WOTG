@@ -31,4 +31,16 @@
         Console.WriteLine("> " & Message)
         Console.ForegroundColor = ConsoleColor.DarkGray
     End Sub
+
+    Public Sub ShowConnexion(ByVal Message As String)
+        Console.ForegroundColor = ConsoleColor.DarkGreen
+        Console.WriteLine("> " & Message)
+        Console.ForegroundColor = ConsoleColor.DarkGray
+    End Sub
+
+    Public Sub ShowDeconnexion(ByVal Message As String)
+        Console.ForegroundColor = ConsoleColor.DarkRed
+        Console.WriteLine("> " & Message)
+        Console.ForegroundColor = ConsoleColor.DarkGray
+    End Sub
 End Module
