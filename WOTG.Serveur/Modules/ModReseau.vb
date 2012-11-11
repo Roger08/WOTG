@@ -98,7 +98,7 @@ Module ModReseau
 
         If JoueurTemp(index).Connecte Then
             Try
-                PaquetByte = ASCIIEncoding.UTF8.GetBytes(Paquet & FIN)
+                PaquetByte = ASCIIEncoding.UTF8.GetBytes(Paquet & SEP & FIN)
                 JoueurTemp(index).Flux.Write(PaquetByte, 0, PaquetByte.Length)
                 JoueurTemp(index).Flux.Flush()
             Catch
@@ -134,11 +134,8 @@ Module ModReseau
                     ' - Boucle vérifiant que plusieurs paquet ne sont pas collés
                     For i = 0 To Paquet.Length - 2
                         ' - Traite le paquet
-                        ' Met le paquet dans la file d'attente
-                        PaquetData.Add(index & SEP & Paquet(i))
-
                         temp = Paquet(i).Split(SEP) ' Récupère l'entête
-                        PaquetHandler(CByte(temp(0))).Invoke() ' Apelle la fonction correspondante au paquet
+                        PaquetHandler(CByte(temp(0)))(index, Paquet(i)) ' Apelle la fonction correspondante au paquet
                     Next
                 End If
             End While
@@ -148,47 +145,66 @@ Module ModReseau
 #Region "Actions enclanchées par des paquets entrants"
 
     ' - Connexion d'un joueur
-    Public Sub Connexion()
+    Public Sub Connexion(ByVal index As Byte, ByVal Datas As String)
         ' Récupère le corps du paquet
-        Dim Datas As String = PaquetData(0)
-        PaquetData.RemoveAt(0)
         Dim Data() As String = Datas.Split(SEP)
 
-        If Data(2) = VersionClient Then ' vérifie la version du joueur
-            If File.Exists("Comptes/" & Data(3).ToLower & ".wotg") Then ' vérifie l'existance du joueur
-                Call ChargerJoueur(Data(0), Data(3)) ' charge le joueur
-                If Joueur(Data(0)).MotDePasse = Data(4) Then ' vérifie le mot de passe
-                    ' TODO : connecter le joueur
+        If Data(1) = VersionClient Then ' vérifie la version du joueur
+            If File.Exists("Comptes/" & Data(2).ToLower & ".wotg") Then ' vérifie l'existance du joueur
+                Call ChargerJoueur(index, Data(2)) ' charge le joueur
+                If Joueur(index).MotDePasse = Data(3) Then ' vérifie le mot de passe
+                    If Not JoueurConnecté(Data(2)) Then
+                        ' TODO : connecter le joueur
+                        JoueurTemp(index).EnJeu = True
+                    Else
+                        Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
+                        Exit Sub
+                    End If
                 Else
-                    'TODO : Mauvais mot de passe
+                    Call EnvoyerMauvaisMessage(index, "Mot de passe incorrect.")
+                    Exit Sub
                 End If
             Else
-                'TODO : Compte innexistant
+                Call EnvoyerMauvaisMessage(index, "Le compte n'existe pas.")
+                Exit Sub
             End If
         Else
-            'TODO : Mauvaise version
+            Call EnvoyerMauvaisMessage(index, "Votre version n'est pas à jour, mettez le à jour. Si le problème persiste, retéléchargez le jeu.")
+            Exit Sub
         End If
     End Sub
 
     ' - Inscription d'un joueur
-    Public Sub Inscription()
+    Public Sub Inscription(ByVal index As Byte, ByVal Datas As String)
         ' Récupère le corps du paquet
-        Dim Datas As String = PaquetData(0)
-        PaquetData.RemoveAt(0)
         Dim Data() As String = Datas.Split(SEP)
 
-        If Not Data(2).Length < 3 Or Not Data(3).Length < 3 Then
-            If Not File.Exists("Comptes/" & Data(2).ToLower & ".wotg") Then
-                Joueur(Data(0)).Nom = Data(2)
-                Joueur(Data(0)).MotDePasse = Data(3)
-                Call SauvegarderJoueur(Data(0))
-                Call Info("Le compte " & Data(2) & " vient d'être créé")
-                Call ViderJoueur(Data(0))
-                ' TODO : Retourner la réussite de l'inscription
+        If Not Data(1).Length < 3 Or Not Data(2).Length < 3 Then
+            If Not File.Exists("Comptes/" & Data(1).ToLower & ".wotg") Then
+                Joueur(index).Nom = Data(1)
+                Joueur(index).MotDePasse = Data(2)
+                Call SauvegarderJoueur(index)
+                Call Info("Le compte " & Data(1) & " vient d'être créé")
+                Call ViderJoueur(index)
+                Call EnvoyerBonMessage(index, "Votre compte vient d'être créé !")
             Else
-                ' TODO : Retourner que le compte existe déjà
+                Call EnvoyerMauvaisMessage(index, "Le compte existe déjà !")
             End If
         End If
+    End Sub
+
+#End Region
+
+#Region "Action necessitant des paquets"
+
+    ' - Envoie d'un "bon message"
+    Public Sub EnvoyerBonMessage(ByVal index As Byte, ByVal Message As String)
+        Call EnvoyerPaquet(index, PaquetServeur.BonMSG & SEP & Message)
+    End Sub
+
+    ' - Envoie d'un "mauvais message"
+    Public Sub EnvoyerMauvaisMessage(ByVal index As Byte, ByVal Message As String)
+        Call EnvoyerPaquet(index, PaquetServeur.MauvaisMSG & SEP & Message)
     End Sub
 
 #End Region

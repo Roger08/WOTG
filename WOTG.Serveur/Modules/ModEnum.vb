@@ -11,7 +11,6 @@
 
     Public Enum PaquetServeur As Byte
         RepConnexion
-        RepInscription
         BonMSG
         MauvaisMSG
     End Enum

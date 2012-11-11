@@ -23,11 +23,13 @@ Module ModReseau
     Sub ConnectCallBack(ByVal IR As IAsyncResult)
         _Socket.EndConnect(IR)
         _Flux = New NetworkStream(_Socket)
+        Call Gameloop()
     End Sub
 
     ' - Initialisation des différents paquets provenant du serveur
     Public Sub InitPaquets()
-
+        PaquetHandler.Add(PaquetServeur.BonMSG, AddressOf BonMessage)
+        PaquetHandler.Add(PaquetServeur.MauvaisMSG, AddressOf MauvaisMessage)
     End Sub
 
     ' - Deconnecte le client
@@ -43,7 +45,7 @@ Module ModReseau
 
         If _Socket.Connected Then
             Try
-                PaquetByte = ASCIIEncoding.UTF8.GetBytes(Paquet & FIN)
+                PaquetByte = ASCIIEncoding.UTF8.GetBytes(Paquet & SEP & FIN)
                 _Flux.Write(PaquetByte, 0, PaquetByte.Length)
                 _Flux.Flush()
             Catch
@@ -79,11 +81,8 @@ Module ModReseau
                     ' - Boucle vérifiant que plusieurs paquet ne sont pas collés
                     For i = 0 To Paquet.Length - 2
                         ' - Traite le paquet
-                        ' Met le paquet dans la file d'attente
-                        PaquetData.Add(Paquet(i))
-
                         temp = Paquet(i).Split(SEP) ' Récupère l'entête
-                        PaquetHandler(CByte(temp(0))).Invoke() ' Apelle la fonction correspondante au paquet
+                        PaquetHandler(CByte(temp(0)))(Paquet(i)) ' Apelle la fonction correspondante au paquet
                     Next
                 End If
             End While
@@ -91,6 +90,24 @@ Module ModReseau
     End Sub
 
 #Region "Actions enclanchées par les paquets entrants"
+
+    ' - Affichage d'un bon message
+    Public Sub BonMessage(ByVal Datas As String)
+        ' Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        ' Affiche le message
+        MsgBox(Data(1), MsgBoxStyle.Information, "Information")
+    End Sub
+
+    ' - Affichage d'un mauvais message
+    Public Sub MauvaisMessage(ByVal Datas As String)
+        ' Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        ' Affiche le message
+        MsgBox(Data(1), MsgBoxStyle.Critical, "Erreur")
+    End Sub
 
 #End Region
 
@@ -100,7 +117,7 @@ Module ModReseau
     Public Sub Connexion(ByVal Pseudo As String, ByVal MotDePasse As String)
         If Not Pseudo.Length < 3 Then
             If Not MotDePasse.Length < 3 Then
-                Call EnvoyerPaquet(PaquetClient.Connexion & SEP & VersionClient & SEP & Pseudo & SEP & MotDePasse & SEP)
+                Call EnvoyerPaquet(PaquetClient.Connexion & SEP & VersionClient & SEP & Pseudo & SEP & MotDePasse)
             Else
                 MsgBox("Votre mot de passe doit faire au moins 3 carractères.", MsgBoxStyle.Critical, "Erreur")
             End If

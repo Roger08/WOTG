@@ -80,6 +80,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\ModEnum.vb" />
+    <Compile Include="Modules\ModJeu.vb" />
     <Compile Include="Modules\ModReseau.vb" />
     <Compile Include="Modules\ModVariables.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

@@ -17,8 +17,7 @@ Module ModVariables
     Public SEP As Char = Chr(0)
     Public FIN As Char = Chr(237)
     Public ListeIndex As New ArrayList
-    Public PaquetHandler As New Dictionary(Of Byte, Action)
-    Public PaquetData As New ArrayList
+    Public PaquetHandler As New Dictionary(Of Byte, Action(Of Byte, String))
 
     ' - Variables de structures
     Public Joueur() As JoueurRec
