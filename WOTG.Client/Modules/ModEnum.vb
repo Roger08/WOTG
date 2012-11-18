@@ -13,5 +13,6 @@
         RepConnexion
         BonMSG
         MauvaisMSG
+        EnvoieJoueur
     End Enum
 End Module

@@ -11,6 +11,9 @@ Module ModReseau
 
     ' - Initialisation du protocole réseau
     Public Sub Init()
+        ' Initialisation des structures
+        Call InitStructures()
+
         ' Initialisation des paquets
         Call InitPaquets()
 
@@ -30,6 +33,8 @@ Module ModReseau
     Public Sub InitPaquets()
         PaquetHandler.Add(PaquetServeur.BonMSG, AddressOf BonMessage)
         PaquetHandler.Add(PaquetServeur.MauvaisMSG, AddressOf MauvaisMessage)
+        PaquetHandler.Add(PaquetServeur.RepConnexion, AddressOf RepConnexion)
+        PaquetHandler.Add(PaquetServeur.EnvoieJoueur, AddressOf RecevoirJoueur)
     End Sub
 
     ' - Deconnecte le client
@@ -107,6 +112,34 @@ Module ModReseau
 
         ' Affiche le message
         MsgBox(Data(1), MsgBoxStyle.Critical, "Erreur")
+    End Sub
+
+    ' - Valide la connexion du joueur
+    Public Sub RepConnexion(ByVal Datas As String)
+        ' - Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        MonIndex = Data(1)
+
+        ' Connecte le joueur
+        If Not Joueur(MonIndex).NomPerso = "" Then
+            ' TODO : Connexion
+        Else
+            MsgBox("création perso")
+        End If
+    End Sub
+
+    ' - Récéption d'un joueur
+    Public Sub RecevoirJoueur(ByVal Datas As String)
+        ' - Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        Dim tempIndex As Byte = Data(1)
+
+        ' Téléchargement du joueur
+        With Joueur(tempIndex)
+            .NomPerso = Data(2)
+        End With
     End Sub
 
 #End Region

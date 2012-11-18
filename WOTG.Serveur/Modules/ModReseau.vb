@@ -154,8 +154,9 @@ Module ModReseau
                 Call ChargerJoueur(index, Data(2)) ' charge le joueur
                 If Joueur(index).MotDePasse = Data(3) Then ' vérifie le mot de passe
                     If Not JoueurConnecté(Data(2)) Then
-                        ' TODO : connecter le joueur
                         JoueurTemp(index).EnJeu = True
+                        Call EnvoyerJoueurs(index)
+                        Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
                     Else
                         Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
                         Exit Sub
@@ -207,5 +208,20 @@ Module ModReseau
         Call EnvoyerPaquet(index, PaquetServeur.MauvaisMSG & SEP & Message)
     End Sub
 
+    ' - Envoie d'un joueur au client
+    Public Sub EnvoyerJoueur(ByVal index As Byte, ByVal indexE As Byte)
+        With Joueur(indexE)
+            Call EnvoyerPaquet(index, PaquetServeur.EnvoieJoueur & SEP & indexE & SEP & .NomPerso)
+        End With
+    End Sub
+
+    ' - Envoie de tous les joueurs à un joueur
+    Public Sub EnvoyerJoueurs(ByVal index As Byte)
+        For i = 0 To ListeIndex.Count - 1
+            If JoueurTemp(ListeIndex(i)).EnJeu Then
+                Call EnvoyerJoueur(index, ListeIndex(i))
+            End If
+        Next
+    End Sub
 #End Region
 End Module
