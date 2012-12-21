@@ -14,18 +14,24 @@ Public Class frmCreationPerso
     Dim CheveuxActuels As Byte = 0
     Dim PeauActuelle As Byte = 0
     Dim VetementsActuels As Byte = 0
+    Dim Creation As Boolean = False
 
     Private Sub frmCreationPerso_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        Creation = False
         End
     End Sub
 
     Private Sub frmCreationPerso_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         RenduJoueur = New RenderWindow(PicPrevJoueur.Handle)
+        RenduJoueur.SetFramerateLimit(10)
         lblEntete.Text = "Félicitations " & Joueur(MonIndex).Nom & ", vous êtes inscrit à Wrath Of The Gods, il vous ne vous reste plus qu'à vous créer un personnage !"
     End Sub
 
     Private Sub frmCreationPerso_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
         frmLogin.Hide()
+        Creation = True
+        Call AfficherInfos()
+        Call AfficherPrevJoueur()
     End Sub
 
     Private Sub tmrEntete_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrEntete.Tick
@@ -41,7 +47,6 @@ Public Class frmCreationPerso
         ' Cheveux +
         If CheveuxActuels <> 5 Then
             CheveuxActuels += 1
-            Call AfficherPrevJoueur()
         End If
     End Sub
 
@@ -49,7 +54,6 @@ Public Class frmCreationPerso
         ' Cheveux -
         If CheveuxActuels <> 0 Then
             CheveuxActuels -= 1
-            Call AfficherPrevJoueur()
         End If
     End Sub
 
@@ -57,7 +61,6 @@ Public Class frmCreationPerso
         ' Vetements +
         If VetementsActuels <> 5 Then
             VetementsActuels += 1
-            Call AfficherPrevJoueur()
         End If
     End Sub
 
@@ -65,7 +68,6 @@ Public Class frmCreationPerso
         ' Vetements -
         If VetementsActuels <> 0 Then
             VetementsActuels -= 0
-            Call AfficherPrevJoueur()
         End If
     End Sub
 
@@ -73,7 +75,6 @@ Public Class frmCreationPerso
         ' Peau +
         If PeauActuelle <> 5 Then
             PeauActuelle += 1
-            Call AfficherPrevJoueur()
         End If
     End Sub
 
@@ -81,30 +82,36 @@ Public Class frmCreationPerso
         ' Peau -
         If PeauActuelle <> 0 Then
             PeauActuelle -= 1
-            Call AfficherPrevJoueur()
         End If
     End Sub
 
     Sub AfficherPrevJoueur()
-        RenduJoueur.Clear(Color.White)
+        While Creation
+            RenduJoueur.Clear(Color.White)
 
-        ' Corps
-        Sprt = New Sprite(imgCorps)
-        Sprt.TextureRect = New IntRect(0, 0, 32, 64)
-        RenduJoueur.Draw(Sprt)
+            imgCorps = New Texture(Application.StartupPath & "/Graphique/Peaux/" & RaceActuelle & "x" & PeauActuelle & ".png")
+            imgVetements = New Texture(Application.StartupPath & "/Graphique/Vetements/" & RaceActuelle & "x" & VetementsActuels & ".png")
+            imgCheveux = New Texture(Application.StartupPath & "/Graphique/Cheveux/" & RaceActuelle & "x" & CheveuxActuels & ".png")
 
-        ' Vetements
-        Sprt = New Sprite(imgVetements)
-        Sprt.TextureRect = New IntRect(0, 0, 32, 64)
-        RenduJoueur.Draw(Sprt)
+            ' Corps
+            Sprt = New Sprite(imgCorps)
+            Sprt.TextureRect = New IntRect(0, 0, 32, 64)
+            RenduJoueur.Draw(Sprt)
 
-        ' Cheveux
-        Sprt = New Sprite(imgCheveux)
-        Sprt.TextureRect = New IntRect(0, 0, 32, 64)
-        RenduJoueur.Draw(Sprt)
+            ' Vetements
+            Sprt = New Sprite(imgVetements)
+            Sprt.TextureRect = New IntRect(0, 0, 32, 64)
+            RenduJoueur.Draw(Sprt)
 
-        RenduJoueur.Display()
-        Sprt.Dispose()
+            ' Cheveux
+            Sprt = New Sprite(imgCheveux)
+            Sprt.TextureRect = New IntRect(0, 0, 32, 64)
+            RenduJoueur.Draw(Sprt)
+
+            RenduJoueur.Display()
+            Sprt.Dispose()
+            Application.DoEvents()
+        End While
     End Sub
 
     Sub AfficherInfos()
@@ -154,7 +161,8 @@ Public Class frmCreationPerso
         If txtNomPerso.Text.Length < 4 Then
             MsgBox("Le nom de personnage doit faire au moins 4 caractères.", MsgBoxStyle.Critical, "Erreur")
         Else
-            Call EnvoyerPaquet("CNouveauPerso" & SEP & txtNomPerso.Text & SEP & RaceActuelle & SEP & ClasseActuelle & SEP & PeauActuelle & CheveuxActuels & SEP & VetementsActuels & SEP)
+            Creation = False
+            Call EnvoyerPaquet(PaquetClient.CreationPersonnage & SEP & txtNomPerso.Text & SEP & RaceActuelle & SEP & ClasseActuelle & SEP & PeauActuelle & CheveuxActuels & SEP & VetementsActuels)
         End If
     End Sub
 End Class

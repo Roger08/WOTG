@@ -7,6 +7,7 @@
     Public Enum PaquetClient As Byte
         Connexion
         Inscription
+        CreationPersonnage
     End Enum
 
     Public Enum PaquetServeur As Byte
