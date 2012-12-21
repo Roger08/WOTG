@@ -101,6 +101,7 @@ Module ModReseau
                 PaquetByte = ASCIIEncoding.UTF8.GetBytes(Paquet & SEP & FIN)
                 JoueurTemp(index).Flux.Write(PaquetByte, 0, PaquetByte.Length)
                 JoueurTemp(index).Flux.Flush()
+                Thread.Sleep(5)
             Catch
                 Call Erreur("Erreur lors de l'envoie du paquet au client #" & index)
             End Try
@@ -157,6 +158,7 @@ Module ModReseau
                         JoueurTemp(index).EnJeu = True
                         Call EnvoyerJoueurs(index)
                         Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
+                        Call ShowConnexion(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter.")
                     Else
                         Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
                         Exit Sub
@@ -211,7 +213,7 @@ Module ModReseau
     ' - Envoie d'un joueur au client
     Public Sub EnvoyerJoueur(ByVal index As Byte, ByVal indexE As Byte)
         With Joueur(indexE)
-            Call EnvoyerPaquet(index, PaquetServeur.EnvoieJoueur & SEP & indexE & SEP & .NomPerso)
+            Call EnvoyerPaquet(index, PaquetServeur.EnvoieJoueur & SEP & indexE & SEP & .Nom & SEP & .NomPerso)
         End With
     End Sub
 

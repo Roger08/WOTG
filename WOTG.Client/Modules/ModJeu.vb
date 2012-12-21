@@ -1,4 +1,6 @@
-﻿Module ModJeu
+﻿Imports System.Threading
+
+Module ModJeu
 
     ' ###########################################
     ' ## Module de gestion graphique et du jeu ##
@@ -19,4 +21,5 @@
         MsgBox("Connexion avec le serveur perdue ! Merci de le signaler à l'équipe du jeu.", MsgBoxStyle.Critical, "Erreur fatale")
         End
     End Sub
+
 End Module

@@ -19,15 +19,17 @@ Module ModReseau
 
         ' Initialisation + connexion du socket
         _Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-        _Socket.BeginConnect("localhost", Port, AddressOf ConnectCallBack, Nothing)
-    End Sub
-
-    ' - Connexion asynchrone au serveur
-    Sub ConnectCallBack(ByVal IR As IAsyncResult)
-        _Socket.EndConnect(IR)
+        _Socket.Connect("localhost", Port)
         _Flux = New NetworkStream(_Socket)
         Call Gameloop()
     End Sub
+
+    ' - Connexion asynchrone au serveur
+    'Sub ConnectCallBack(ByVal IR As IAsyncResult)
+    '    _Socket.EndConnect(IR)
+    '    _Flux = New NetworkStream(_Socket)
+    '    Call Gameloop()
+    'End Sub
 
     ' - Initialisation des différents paquets provenant du serveur
     Public Sub InitPaquets()
@@ -71,12 +73,13 @@ Module ModReseau
 
         ' - Boucle de récéption des paquets
         With _Socket
-            While .Connected
+            If .Connected Then
                 If .Poll(10, SelectMode.SelectRead) And .Available = 0 Then
                     ' Socket serveur semble déconnecté
                     Call Deconnexion()
 
                 ElseIf .Available > 0 Then
+
                     ' - Socket client semble connecté et à envoyé un paquet
                     ReDim PaquetByte(.Available) ' Défini la taille du paquet
                     _Flux.Read(PaquetByte, 0, PaquetByte.Length) ' Lecture du paquet
@@ -87,10 +90,13 @@ Module ModReseau
                     For i = 0 To Paquet.Length - 2
                         ' - Traite le paquet
                         temp = Paquet(i).Split(SEP) ' Récupère l'entête
-                        PaquetHandler(CByte(temp(0)))(Paquet(i)) ' Apelle la fonction correspondante au paquet
+                        Try
+                            PaquetHandler(CByte(temp(0)))(Paquet(i)) ' Apelle la fonction correspondante au paquet
+                        Catch
+                        End Try
                     Next
                 End If
-            End While
+            End If
         End With
     End Sub
 
@@ -125,7 +131,7 @@ Module ModReseau
         If Not Joueur(MonIndex).NomPerso = "" Then
             ' TODO : Connexion
         Else
-            MsgBox("création perso")
+            frmCreationPerso.Show()
         End If
     End Sub
 
@@ -135,11 +141,14 @@ Module ModReseau
         Dim Data() As String = Datas.Split(SEP)
 
         Dim tempIndex As Byte = Data(1)
+        Joueur(tempIndex) = New WOTG.Format.Structures.JoueurRec
 
         ' Téléchargement du joueur
         With Joueur(tempIndex)
-            .NomPerso = Data(2)
+            .Nom = Data(2)
+            .NomPerso = Data(3)
         End With
+
     End Sub
 
 #End Region
