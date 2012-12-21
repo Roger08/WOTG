@@ -4,6 +4,8 @@
         ' - Dimension des tableaux
         ReDim Joueur(MAX_JOUEURS)
         ReDim JoueurTemp(MAX_JOUEURS)
+        ReDim Classe(MAX_CLASSES)
+        ReDim Race(MAX_RACES)
 
         Call MOTD()
         Call Init()

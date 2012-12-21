@@ -22,6 +22,8 @@ Module ModVariables
     ' - Variables de structures
     Public Joueur() As JoueurRec
     Public JoueurTemp() As JoueurTempRec
+    Public Classe() As ClasseRec
+    Public Race() As RaceRec
 
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250

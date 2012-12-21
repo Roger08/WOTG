@@ -30,7 +30,7 @@ Module ModVariables
     Public Quete() As QueteRec
     Public PNJ() As PNJRec
     Public Classe() As ClasseRec
-    Public Races() As RaceRec
+    Public Race() As RaceRec
 
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250
