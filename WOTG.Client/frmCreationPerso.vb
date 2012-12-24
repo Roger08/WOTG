@@ -158,11 +158,11 @@ Public Class frmCreationPerso
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        If txtNomPerso.Text.Length < 4 Then
+        If txtNomPerso.Text.Length < 3 Then
             MsgBox("Le nom de personnage doit faire au moins 4 caractères.", MsgBoxStyle.Critical, "Erreur")
         Else
             Creation = False
-            Call EnvoyerPaquet(PaquetClient.CreationPersonnage & SEP & txtNomPerso.Text & SEP & RaceActuelle & SEP & ClasseActuelle & SEP & PeauActuelle & CheveuxActuels & SEP & VetementsActuels)
+            Call EnvoyerPaquet(PaquetClient.CreationPersonnage & SEP & txtNomPerso.Text & SEP & RaceActuelle & SEP & ClasseActuelle & SEP & PeauActuelle & SEP & CheveuxActuels & SEP & VetementsActuels)
         End If
     End Sub
 End Class

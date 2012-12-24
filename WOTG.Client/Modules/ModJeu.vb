@@ -18,6 +18,7 @@ Module ModJeu
 
             Application.DoEvents()
         End While
+
         MsgBox("Connexion avec le serveur perdue ! Merci de le signaler à l'équipe du jeu.", MsgBoxStyle.Critical, "Erreur fatale")
         End
     End Sub

@@ -29,6 +29,7 @@ Module ModReseau
     Public Sub InitPaquets()
         PaquetHandler.Add(PaquetClient.Connexion, AddressOf Connexion)
         PaquetHandler.Add(PaquetClient.Inscription, AddressOf Inscription)
+        PaquetHandler.Add(PaquetClient.CreationPersonnage, AddressOf CreationPersonnage)
     End Sub
 
     ' - Accepte un client de manière asynchrone
@@ -195,6 +196,25 @@ Module ModReseau
             Else
                 Call EnvoyerMauvaisMessage(index, "Le compte existe déjà !")
             End If
+        End If
+    End Sub
+
+    ' - Creation d'un personnage
+    Public Sub CreationPersonnage(ByVal index As Byte, ByVal Datas As String)
+        ' Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        If Not Data(1).Length < 3 Then
+            With Joueur(index)
+                .NomPerso = Data(1)
+                .Race = Data(2)
+                .Classe = Data(3)
+                .Peau = Data(4)
+                .Cheveux = Data(5)
+                .Vetements = Data(6)
+            End With
+            Call SauvegarderJoueur(index)
+            Call Info(Joueur(index).Nom & " vient de créer le personnage " & Joueur(index).NomPerso)
         End If
     End Sub
 

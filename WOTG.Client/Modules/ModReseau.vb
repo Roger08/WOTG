@@ -45,7 +45,7 @@ Module ModReseau
     Public Sub Deconnexion()
         _Socket.Close()
         _Flux = Nothing
-        _Flux.Dispose()
+        '_Flux.Dispose()
     End Sub
 
     ' - Envoi de paquet
