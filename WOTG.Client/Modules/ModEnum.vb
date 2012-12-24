@@ -15,5 +15,7 @@
         BonMSG
         MauvaisMSG
         EnvoieJoueur
+        EnvoieRace
+        EnvoieClasse
     End Enum
 End Module

@@ -157,6 +157,8 @@ Module ModReseau
                     If Not JoueurConnecté(Data(2)) Then
                         JoueurTemp(index).EnJeu = True
                         Call EnvoyerJoueurs(index)
+                        Call EnvoyerRaces(index)
+                        Call EnvoyerClasses(index)
                         Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
                         Call ShowConnexion(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter.")
                     Else
@@ -224,6 +226,46 @@ Module ModReseau
                 Call EnvoyerJoueur(index, ListeIndex(i))
             End If
         Next
+    End Sub
+
+    ' - Envoie des races à un joueur
+    Public Sub EnvoyerRaces(ByVal index As Byte)
+        For i = 1 To MAX_RACES
+            Call EnvoyerRace(index, i)
+        Next
+    End Sub
+
+    ' - Envoie d'une race à un joueur
+    Public Sub EnvoyerRace(ByVal index As Byte, ByVal raceNum As Byte)
+        Dim Paquet As String = PaquetServeur.EnvoieRace & SEP & raceNum & SEP
+
+        ' Mise en place de la race dans la variable
+        With Race(raceNum)
+            Paquet = Paquet & .Nom & SEP
+            Paquet = Paquet & .Description
+        End With
+
+        Call EnvoyerPaquet(index, Paquet)
+    End Sub
+
+    ' - Envoie des classes à un joueur
+    Public Sub EnvoyerClasses(ByVal index As Byte)
+        For i = 1 To MAX_CLASSES
+            Call EnvoyerClasse(index, i)
+        Next
+    End Sub
+
+    ' - Envoie d'une classe à un joueur
+    Public Sub EnvoyerClasse(ByVal index As Byte, ByVal classeNum As Byte)
+        Dim Paquet As String = PaquetServeur.EnvoieClasse & SEP & classeNum & SEP
+
+        ' Mise en place de la race dans la variable
+        With Classe(classeNum)
+            Paquet = Paquet & .Nom & SEP
+            Paquet = Paquet & .Description
+        End With
+
+        Call EnvoyerPaquet(index, Paquet)
     End Sub
 #End Region
 End Module

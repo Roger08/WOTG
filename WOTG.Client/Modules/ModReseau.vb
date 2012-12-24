@@ -37,6 +37,8 @@ Module ModReseau
         PaquetHandler.Add(PaquetServeur.MauvaisMSG, AddressOf MauvaisMessage)
         PaquetHandler.Add(PaquetServeur.RepConnexion, AddressOf RepConnexion)
         PaquetHandler.Add(PaquetServeur.EnvoieJoueur, AddressOf RecevoirJoueur)
+        PaquetHandler.Add(PaquetServeur.EnvoieRace, AddressOf RecevoirRace)
+        PaquetHandler.Add(PaquetServeur.EnvoieClasse, AddressOf RecevoirClasse)
     End Sub
 
     ' - Deconnecte le client
@@ -147,6 +149,38 @@ Module ModReseau
         With Joueur(tempIndex)
             .Nom = Data(2)
             .NomPerso = Data(3)
+        End With
+
+    End Sub
+
+    ' - Récéption d'une race
+    Public Sub RecevoirRace(ByVal Datas As String)
+        ' - Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        Dim tempNum As Byte = Data(1)
+        Race(tempNum) = New WOTG.Format.Structures.RaceRec
+
+        ' Téléchargement de la race
+        With Race(tempNum)
+            .Nom = Data(2)
+            .Description = Data(3)
+        End With
+
+    End Sub
+
+    ' - Récéption d'une classe
+    Public Sub RecevoirClasse(ByVal Datas As String)
+        ' - Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        Dim tempNum As Byte = Data(1)
+        Classe(tempNum) = New WOTG.Format.Structures.ClasseRec
+
+        ' Téléchargement de la race
+        With Classe(tempNum)
+            .Nom = Data(2)
+            .Description = Data(3)
         End With
 
     End Sub
