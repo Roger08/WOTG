@@ -13,3 +13,4 @@ C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Client\obj\x86\Debug\WOTG.Client.xml
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Client\obj\x86\Debug\WOTG.Client.pdb
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Client\obj\x86\Debug\WOTG.Client.frmLogin.resources
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Client\obj\x86\Debug\WOTG.Client.frmCreationPerso.resources
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.Client\obj\x86\Debug\WOTG.Client.frmJeu.resources

@@ -87,6 +87,12 @@
     <Compile Include="frmCreationPerso.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmJeu.Designer.vb">
+      <DependentUpon>frmJeu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmJeu.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmCreationPerso.resx">
       <DependentUpon>frmCreationPerso.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmJeu.resx">
+      <DependentUpon>frmJeu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>

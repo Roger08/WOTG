@@ -131,6 +131,7 @@ Module ModReseau
 
         ' Connecte le joueur
         If Not Joueur(MonIndex).NomPerso = "" Then
+            frmJeu.Show()
             ' TODO : Connexion
         Else
             frmCreationPerso.Show()

@@ -162,6 +162,14 @@ Module ModReseau
                         Call EnvoyerClasses(index)
                         Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
                         Call ShowConnexion(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter.")
+
+                        ' Envoie le joueur aux autres
+                        For i = 0 To ListeIndex.Count - 1
+                            If JoueurTemp(ListeIndex(i)).EnJeu Then
+                                Call EnvoyerJoueur(ListeIndex(i), index)
+                            End If
+                        Next
+
                     Else
                         Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
                         Exit Sub
@@ -205,16 +213,31 @@ Module ModReseau
         Dim Data() As String = Datas.Split(SEP)
 
         If Not Data(1).Length < 3 Then
-            With Joueur(index)
-                .NomPerso = Data(1)
-                .Race = Data(2)
-                .Classe = Data(3)
-                .Peau = Data(4)
-                .Cheveux = Data(5)
-                .Vetements = Data(6)
-            End With
-            Call SauvegarderJoueur(index)
-            Call Info(Joueur(index).Nom & " vient de créer le personnage " & Joueur(index).NomPerso)
+            If PseudoLibre(Data(1)) Then
+                With Joueur(index)
+                    .NomPerso = Data(1)
+                    .Race = Data(2)
+                    .Classe = Data(3)
+                    .Peau = Data(4)
+                    .Cheveux = Data(5)
+                    .Vetements = Data(6)
+                End With
+                Call SauvegarderJoueur(index)
+                Call Info(Joueur(index).Nom & " vient de créer le personnage " & Joueur(index).NomPerso)
+                File.AppendAllText("Comptes/ListePersos.txt", vbCrLf & Data(1))
+
+                For i = 0 To ListeIndex.Count - 1
+                    If JoueurTemp(ListeIndex(i)).EnJeu Then
+                        Call EnvoyerJoueur(ListeIndex(i), index)
+                    End If
+                Next
+
+                Call EnvoyerBonMessage(index, "Votre personnage a été créé !")
+                Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
+
+            Else
+                Call EnvoyerMauvaisMessage(index, "Ce nom de personnage est déjà utilisé !")
+            End If
         End If
     End Sub
 
