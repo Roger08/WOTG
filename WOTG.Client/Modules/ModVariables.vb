@@ -31,6 +31,7 @@ Module ModVariables
     Public PNJ() As PNJRec
     Public Classe() As ClasseRec
     Public Race() As RaceRec
+    Public Options As OptionsRec
 
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250
@@ -48,5 +49,13 @@ Module ModVariables
 
     ' - Variables diverses
     Public VersionClient As String = "0.0.1"
+
+#Region "Strutures"
+
+    <Serializable()>
+    Public Structure OptionsRec
+
+    End Structure
+#End Region
 End Module
 

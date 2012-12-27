@@ -262,7 +262,7 @@ Module ModReseau
                 If Not EstBanni(Data(2).ToLower) Then ' vérifie si le compte est banni
                     If Not IPBannie(JoueurTemp(index).IP) Then ' vérifie si l'ip est bannie
                         Call ChargerJoueur(index, Data(2)) ' charge le joueur
-                        If Joueur(index).Acces = 1 Then
+                        If Joueur(index).Acces = 1 Then ' verifie l'accès du joueur
                             If Joueur(index).MotDePasse = Data(3) Then ' vérifie le mot de passe
                                 If Not JoueurConnecté(Data(2)) Then
                                     JoueurTemp(index).EnJeu = True
