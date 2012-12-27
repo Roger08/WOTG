@@ -8,7 +8,7 @@
         Connexion
         Inscription
         CreationPersonnage
-        ' Paquets editeurs
+        ' Paquets éditeurs
         EConnexion
     End Enum
 

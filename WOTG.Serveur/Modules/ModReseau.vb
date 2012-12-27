@@ -30,6 +30,7 @@ Module ModReseau
         PaquetHandler.Add(PaquetClient.Connexion, AddressOf Connexion)
         PaquetHandler.Add(PaquetClient.Inscription, AddressOf Inscription)
         PaquetHandler.Add(PaquetClient.CreationPersonnage, AddressOf CreationPersonnage)
+        PaquetHandler.Add(PaquetClient.EConnexion, AddressOf ConnexionEditeur)
     End Sub
 
     ' - Accepte un client de manière asynchrone
@@ -42,7 +43,7 @@ Module ModReseau
                 .IP = (CType(.Socket.RemoteEndPoint, IPEndPoint).Address.ToString)
                 ListeIndex.Add(IndexActuel)
                 .Connecte = True
-                Call ShowConnexion("Un client vient de se connecter sur le slot #" & IndexActuel & " depuis l'IP " & .IP & ".")
+                Call ShowConnexion(1, "Un client vient de se connecter sur le slot #" & IndexActuel & " depuis l'IP " & .IP & ".")
                 .Flux = New NetworkStream(.Socket)
                 .Thread = New thread(AddressOf RecevoirPaquets)
                 .Thread.Start()
@@ -163,7 +164,7 @@ Module ModReseau
                                 Call EnvoyerRaces(index)
                                 Call EnvoyerClasses(index)
                                 Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
-                                Call ShowConnexion(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter.")
+                                Call ShowConnexion(1, Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter.")
 
                                 ' Envoie le joueur aux autres
                                 For i = 0 To ListeIndex.Count - 1
@@ -248,6 +249,63 @@ Module ModReseau
             Else
                 Call EnvoyerMauvaisMessage(index, "Ce nom de personnage est déjà utilisé !")
             End If
+        End If
+    End Sub
+
+    ' - Connexion d'un éditeur
+    Public Sub ConnexionEditeur(ByVal index As Byte, ByVal Datas As String)
+        ' Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        If Data(1) = VersionEditeur Then ' vérifie la version du joueur
+            If File.Exists("Comptes/" & Data(2).ToLower & ".wotg") Then ' vérifie l'existance du joueur
+                If Not EstBanni(Data(2).ToLower) Then ' vérifie si le compte est banni
+                    If Not IPBannie(JoueurTemp(index).IP) Then ' vérifie si l'ip est bannie
+                        Call ChargerJoueur(index, Data(2)) ' charge le joueur
+                        If Joueur(index).Acces = 1 Then
+                            If Joueur(index).MotDePasse = Data(3) Then ' vérifie le mot de passe
+                                If Not JoueurConnecté(Data(2)) Then
+                                    JoueurTemp(index).EnJeu = True
+                                    Call EnvoyerJoueurs(index)
+                                    Call EnvoyerRaces(index)
+                                    Call EnvoyerClasses(index)
+                                    Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
+                                    Call ShowConnexion(2, Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter depuis un éditeur.")
+
+                                    ' Envoie le joueur aux autres
+                                    For i = 0 To ListeIndex.Count - 1
+                                        If JoueurTemp(ListeIndex(i)).EnJeu Then
+                                            Call EnvoyerJoueur(ListeIndex(i), index)
+                                        End If
+                                    Next
+
+                                Else
+                                    Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
+                                    Exit Sub
+                                End If
+                            Else
+                                Call EnvoyerMauvaisMessage(index, "Mot de passe incorrect.")
+                                Exit Sub
+                            End If
+                        Else
+                            Call EnvoyerMauvaisMessage(index, "Votre compte n'est pas autorisé à éditeur le jeu.")
+                            Exit Sub
+                        End If
+                    Else
+                        Call EnvoyerMauvaisMessage(index, "Votre adresse IP est bannie de Wrath Of The Gods")
+                        Exit Sub
+                    End If
+                    Else
+                        Call EnvoyerMauvaisMessage(index, "Votre compte est banni de Wrath Of The Gods.")
+                        Exit Sub
+                    End If
+            Else
+                Call EnvoyerMauvaisMessage(index, "Le compte n'existe pas.")
+                Exit Sub
+            End If
+        Else
+            Call EnvoyerMauvaisMessage(index, "Votre version de l'éditeur n'est pas à jour, veuillez utiliser l'updater de l'équipe.")
+            Exit Sub
         End If
     End Sub
 

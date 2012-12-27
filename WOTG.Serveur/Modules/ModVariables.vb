@@ -41,5 +41,6 @@ Module ModVariables
 
     ' - Variables diverses
     Public VersionClient As String = "0.0.1"
+    Public VersionEditeur As String = "0.0.1"
     Public VersionServeur As String = "0.0.1"
 End Module

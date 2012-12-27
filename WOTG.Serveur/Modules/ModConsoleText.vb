@@ -32,8 +32,12 @@
         Console.ForegroundColor = ConsoleColor.DarkGray
     End Sub
 
-    Public Sub ShowConnexion(ByVal Message As String)
-        Console.ForegroundColor = ConsoleColor.DarkGreen
+    Public Sub ShowConnexion(ByVal Type As Byte, ByVal Message As String)
+        If Type = 1 Then
+            Console.ForegroundColor = ConsoleColor.DarkGreen
+        ElseIf Type = 2 Then
+            Console.ForegroundColor = ConsoleColor.DarkYellow
+        End If
         Console.WriteLine("> " & Message)
         Console.ForegroundColor = ConsoleColor.DarkGray
     End Sub
