@@ -153,29 +153,39 @@ Module ModReseau
 
         If Data(1) = VersionClient Then ' vérifie la version du joueur
             If File.Exists("Comptes/" & Data(2).ToLower & ".wotg") Then ' vérifie l'existance du joueur
-                Call ChargerJoueur(index, Data(2)) ' charge le joueur
-                If Joueur(index).MotDePasse = Data(3) Then ' vérifie le mot de passe
-                    If Not JoueurConnecté(Data(2)) Then
-                        JoueurTemp(index).EnJeu = True
-                        Call EnvoyerJoueurs(index)
-                        Call EnvoyerRaces(index)
-                        Call EnvoyerClasses(index)
-                        Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
-                        Call ShowConnexion(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter.")
+                If Not EstBanni(Data(2).ToLower) Then ' vérifie si le compte est banni
+                    If Not IPBannie(JoueurTemp(index).IP) Then ' vérifie si l'ip est bannie
+                        Call ChargerJoueur(index, Data(2)) ' charge le joueur
+                        If Joueur(index).MotDePasse = Data(3) Then ' vérifie le mot de passe
+                            If Not JoueurConnecté(Data(2)) Then
+                                JoueurTemp(index).EnJeu = True
+                                Call EnvoyerJoueurs(index)
+                                Call EnvoyerRaces(index)
+                                Call EnvoyerClasses(index)
+                                Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
+                                Call ShowConnexion(Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter.")
 
-                        ' Envoie le joueur aux autres
-                        For i = 0 To ListeIndex.Count - 1
-                            If JoueurTemp(ListeIndex(i)).EnJeu Then
-                                Call EnvoyerJoueur(ListeIndex(i), index)
+                                ' Envoie le joueur aux autres
+                                For i = 0 To ListeIndex.Count - 1
+                                    If JoueurTemp(ListeIndex(i)).EnJeu Then
+                                        Call EnvoyerJoueur(ListeIndex(i), index)
+                                    End If
+                                Next
+
+                            Else
+                                Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
+                                Exit Sub
                             End If
-                        Next
-
+                        Else
+                            Call EnvoyerMauvaisMessage(index, "Mot de passe incorrect.")
+                            Exit Sub
+                        End If
                     Else
-                        Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
+                        Call EnvoyerMauvaisMessage(index, "Votre adresse IP est bannie de Wrath Of The Gods")
                         Exit Sub
                     End If
                 Else
-                    Call EnvoyerMauvaisMessage(index, "Mot de passe incorrect.")
+                    Call EnvoyerMauvaisMessage(index, "Votre compte est banni de Wrath Of The Gods.")
                     Exit Sub
                 End If
             Else
