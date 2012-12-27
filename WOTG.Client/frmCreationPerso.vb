@@ -18,7 +18,7 @@ Public Class frmCreationPerso
 
     Private Sub frmCreationPerso_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Creation = False
-        End
+        If Not frmJeu.Visible Then End
     End Sub
 
     Private Sub frmCreationPerso_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
