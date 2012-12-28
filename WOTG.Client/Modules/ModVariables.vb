@@ -54,7 +54,9 @@ Module ModVariables
 
     <Serializable()>
     Public Structure OptionsRec
-
+        Dim Pseudo As String
+        Dim MotDePasse As String
+        Dim Memoriser As Boolean
     End Structure
 #End Region
 End Module
