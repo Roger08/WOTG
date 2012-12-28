@@ -1,10 +1,72 @@
 ﻿Imports System.Threading
+Imports SFML.Graphics
+Imports SFML.Window
+Imports System.IO
 
 Module ModJeu
 
     ' ###########################################
     ' ## Module de gestion graphique et du jeu ##
     ' ###########################################
+
+    ' - Initialisation du moteur graphique
+    Public Sub InitGraph()
+        'FenetreRendu = New RenderWindow(frmEditeur.PicJeu.Handle)
+        'FenetreRendu.SetFramerateLimit(50)
+
+        ReDim Map(MAX_MAPS)
+        For i = 0 To MAX_MAPS
+            ReDim Map(i).Cases(MAX_MAPX, MAX_MAPY)
+        Next
+
+        ' - Chargement des fichiers
+        Call ChargerTiles()
+
+        ' Chargement du moteur de texte
+        PoliceJeu = New Font("C:\Windows\Fonts\Arial.ttf")
+
+        ' - Charger la selection du tiles
+        Canvas.Parent = frmEditeur.picTiles
+        RecSelect.Parent = Canvas
+        RecSelect.Width = 32
+        RecSelect.Height = 32
+        RecSelect.BorderColor = Drawing.Color.DarkGreen
+        RecSelect.Location = New Point(0, 0)
+
+        frmEditeur.ToolStripButton6.Checked = True
+        frmEditeur.ToolStripButton5.Checked = True
+        MapActuelle = Joueur(MonIndex).Map
+
+        ' Chargement des données binaires depuis FTP
+
+        EnJeu = True
+    End Sub
+
+    ' - Décharger le moteur graphique
+    Public Sub DechargGraph()
+        FenetreRendu.Dispose()
+
+        For i = 0 To TotalTiles
+            imgTiles(i).Dispose()
+        Next
+    End Sub
+
+    ' - Charge les tilsets
+    Public Sub ChargerTiles()
+        For i = 0 To 255
+            If File.Exists(Application.StartupPath & "/Graphique/Tilesets/" & i & ".png") Then
+                imgTiles(i) = New Texture(Application.StartupPath & "/Graphique/Tilesets/" & i & ".png")
+                frmEditeur.lstTiles.Items.Add("Tilesets/" & i & ".png")
+            Else
+                Exit For
+            End If
+        Next
+
+        frmEditeur.lstTiles.Items.Add("Attributs")
+
+        ' - Afficher un tile
+        frmEditeur.lstTiles.SelectedIndex = 0
+    End Sub
 
     ' - Boucle de rafraichissement du jeu
     Public Sub Gameloop()

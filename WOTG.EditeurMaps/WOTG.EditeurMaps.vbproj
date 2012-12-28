@@ -49,6 +49,13 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="sfmlnet-graphics-2">
+      <HintPath>..\..\..\SFML.Net-2.0-rc\lib\x86\sfmlnet-graphics-2.dll</HintPath>
+    </Reference>
+    <Reference Include="sfmlnet-window-2">
+      <HintPath>..\..\..\SFML.Net-2.0-rc\lib\x86\sfmlnet-window-2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -61,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="SFML" />
+    <Import Include="SFML.Graphics" />
+    <Import Include="SFML.Window" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -72,6 +82,18 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmChargement.Designer.vb">
+      <DependentUpon>frmChargement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChargement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditeur.Designer.vb">
+      <DependentUpon>frmEditeur.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditeur.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +105,7 @@
     <Compile Include="Modules\ModEnum.vb" />
     <Compile Include="Modules\ModFonctions.vb" />
     <Compile Include="Modules\ModJeu.vb" />
+    <Compile Include="Modules\ModProgramme.vb" />
     <Compile Include="Modules\ModReseau.vb" />
     <Compile Include="Modules\ModVariables.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -102,6 +125,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmChargement.resx">
+      <DependentUpon>frmChargement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditeur.resx">
+      <DependentUpon>frmEditeur.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>

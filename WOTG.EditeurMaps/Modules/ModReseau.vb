@@ -131,7 +131,7 @@ Module ModReseau
 
         ' Connecte le joueur
         If Not Joueur(MonIndex).NomPerso = "" Then
-            ' TODO : Connexion
+            frmEditeur.Show()
         Else
             MsgBox("Connexion impossible : votre compte ne dispose d'aucun personnage !", MsgBoxStyle.Critical, "Erreur")
         End If
@@ -189,7 +189,7 @@ Module ModReseau
 
 #Region "Actions necessitant des paquets"
 
-    ' - Envoi de la connexion du client
+    ' - Envoi de la connexion de l'éditeur
     Public Sub Connexion(ByVal Pseudo As String, ByVal MotDePasse As String)
         If Not Pseudo.Length < 3 Then
             If Not MotDePasse.Length < 3 Then

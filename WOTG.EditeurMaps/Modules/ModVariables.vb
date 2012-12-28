@@ -3,6 +3,9 @@ Imports System.Net.Sockets
 Imports System.IO
 Imports WOTG.Format.Structures
 Imports System.Collections
+Imports SFML.Graphics
+Imports SFML.Window
+Imports Microsoft.VisualBasic.PowerPacks
 
 Module ModVariables
 
@@ -20,6 +23,17 @@ Module ModVariables
     Public ListeIndex As New ArrayList
     Public PaquetHandler As New Dictionary(Of Byte, Action(Of String))
 
+    ' - Variables Graphiques
+    Public FenetreRendu As RenderWindow
+    Public imgSprite As Texture
+    Public sprtSprite As Sprite
+    Public imgTiles() As Texture
+    Public sprtTiles As Sprite
+    Public PoliceJeu As Font
+    Public Texte As Text
+    Public Canvas As New ShapeContainer
+    Public RecSelect As New PowerPacks.RectangleShape
+
     ' - Variables de structures
     Public Joueur() As JoueurRec
     Public JoueurTemp() As JoueurTempRec
@@ -36,8 +50,8 @@ Module ModVariables
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250
     Public MAX_MAPS As Integer = 500
-    Public MAX_MAPX As Byte = 30
-    Public MAX_MAPY As Byte = 30
+    Public MAX_MAPX As Byte = 19
+    Public MAX_MAPY As Byte = 15
     Public MAX_SECTEURS As Integer = 10
     Public MAX_OBJETS As Integer = 500
     Public MAX_SORTS As Integer = 500
@@ -49,6 +63,11 @@ Module ModVariables
 
     ' - Variables diverses
     Public VersionEditeur As String = "0.0.1"
+    Public MapActuelle As Integer
+    Public EnJeu As Boolean = False
+    Public FTP As String = "hugo.m57.free.fr"
+    Public FTPPass As String = "froggy"
+    Public TotalTiles As Byte
 
 #Region "Strutures"
 
