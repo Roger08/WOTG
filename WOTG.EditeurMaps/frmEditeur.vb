@@ -71,4 +71,37 @@
 
         lblPosition.Text = ("X : " & PicscreenX & " Y : " & PicscreenY)
     End Sub
+
+    ' - La souris se baisse sur les tiles
+    Private Sub picTiles_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picTiles.MouseDown
+        ' - Dit que la souris est appuyée
+        TileCliqué = True
+
+        TileClic = EncodeXY(Int(e.X / 32), Int(e.Y / 32))
+        RecSelect.Location = New Point(Int(e.X / 32) * 32, Int(e.Y / 32) * 32)
+        RecSelect.Width = 32
+        RecSelect.Height = 32
+    End Sub
+
+    ' - La souris se déplace sur les tiles
+    Private Sub picTiles_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picTiles.MouseMove
+        If TileCliqué Then
+
+            If Not (Int(e.X / 32) * 32 - RecSelect.Location.X) = 0 Or (Int(e.Y / 32) * 32 = RecSelect.Location.Y) = 0 Then
+                RecSelect.Width = (Int(e.X / 32) * 32 - RecSelect.Location.X) + 32
+                RecSelect.Height = (Int(e.Y / 32) * 32 - RecSelect.Location.Y) + 32
+            Else
+                RecSelect.Width = 32
+                RecSelect.Height = 32
+            End If
+
+            TileClic = EncodeXY(Int(RecSelect.Left / 32), Int(RecSelect.Top / 32))
+        End If
+    End Sub
+
+    ' - La souris se lève des tiles
+    Private Sub picTiles_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picTiles.MouseUp
+        ' - Dit que la souris est levée
+        TileCliqué = False
+    End Sub
 End Class

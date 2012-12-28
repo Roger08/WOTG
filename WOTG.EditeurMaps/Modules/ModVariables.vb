@@ -74,8 +74,8 @@ Module ModVariables
     Public EnJeu As Boolean = False
     Public PicscreenX As Byte
     Public PicscreenY As Byte
-    Public TileX As Byte
-    Public TileY As Byte
+    Public TileCliqué As Boolean
+    Public TileClic As Short
 
 #Region "Strutures"
 
