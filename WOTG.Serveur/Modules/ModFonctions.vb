@@ -104,4 +104,25 @@ Module ModFonctions
 
         Return (temp)
     End Function
+
+    ' - Vérifie si la clef est validé pour ce compte
+    Public Function ClefValide(ByVal pseudo As String, ByVal Clef As String) As Boolean
+        Dim temp As Boolean = False
+
+        If File.Exists("Clefs/" & pseudo.ToLower & ".txt") Then
+            Dim Clefs() As String = File.ReadAllLines("Clefs/" & pseudo.ToLower & ".txt")
+
+            For i = 0 To Clefs.Length - 1
+                If Clefs(i) = Clef Then
+                    temp = True
+                    Return (temp)
+                End If
+            Next
+        Else
+            File.WriteAllText("Clefs/" & pseudo.ToLower & ".txt", Clef)
+            temp = True
+        End If
+
+        Return (temp)
+    End Function
 End Module

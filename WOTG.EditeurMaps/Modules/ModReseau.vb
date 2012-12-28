@@ -193,7 +193,7 @@ Module ModReseau
     Public Sub Connexion(ByVal Pseudo As String, ByVal MotDePasse As String)
         If Not Pseudo.Length < 3 Then
             If Not MotDePasse.Length < 3 Then
-                Call EnvoyerPaquet(PaquetClient.EConnexion & SEP & VersionEditeur & SEP & Pseudo & SEP & MotDePasse)
+                Call EnvoyerPaquet(PaquetClient.EConnexion & SEP & VersionEditeur & SEP & Pseudo & SEP & MotDePasse & SEP & Options.Clef)
             Else
                 MsgBox("Votre mot de passe doit faire au moins 3 carractères.", MsgBoxStyle.Critical, "Erreur")
             End If

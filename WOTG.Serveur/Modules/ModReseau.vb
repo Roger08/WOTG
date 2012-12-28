@@ -265,20 +265,25 @@ Module ModReseau
                         If Joueur(index).Acces = 1 Then ' verifie l'accès du joueur
                             If Joueur(index).MotDePasse = Data(3) Then ' vérifie le mot de passe
                                 If Not JoueurConnecté(Data(2)) Then
-                                    JoueurTemp(index).EnJeu = True
-                                    Call EnvoyerJoueurs(index)
-                                    Call EnvoyerRaces(index)
-                                    Call EnvoyerClasses(index)
-                                    Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
-                                    Call ShowConnexion(2, Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter depuis un éditeur.")
+                                    If ClefValide(Data(2), Data(4)) Then ' vérifie la clef de l'éditeur
+                                        JoueurTemp(index).EnJeu = True
+                                        Call EnvoyerJoueurs(index)
+                                        Call EnvoyerRaces(index)
+                                        Call EnvoyerClasses(index)
+                                        Call EnvoyerPaquet(index, PaquetServeur.RepConnexion & SEP & index)
+                                        Call ShowConnexion(2, Joueur(index).Nom & "/" & Joueur(index).NomPerso & " vient de se connecter depuis un éditeur.")
 
-                                    ' Envoie le joueur aux autres
-                                    For i = 0 To ListeIndex.Count - 1
-                                        If JoueurTemp(ListeIndex(i)).EnJeu Then
-                                            Call EnvoyerJoueur(ListeIndex(i), index)
-                                        End If
-                                    Next
+                                        ' Envoie le joueur aux autres
+                                        For i = 0 To ListeIndex.Count - 1
+                                            If JoueurTemp(ListeIndex(i)).EnJeu Then
+                                                Call EnvoyerJoueur(ListeIndex(i), index)
+                                            End If
+                                        Next
 
+                                    Else
+                                        Call EnvoyerMauvaisMessage(index, "La clef de sécurité est incorrecte.")
+                                        Exit Sub
+                                    End If
                                 Else
                                     Call EnvoyerMauvaisMessage(index, "Le joueur est déjà connecté.")
                                     Exit Sub
@@ -295,10 +300,10 @@ Module ModReseau
                         Call EnvoyerMauvaisMessage(index, "Votre adresse IP est bannie de Wrath Of The Gods")
                         Exit Sub
                     End If
-                    Else
-                        Call EnvoyerMauvaisMessage(index, "Votre compte est banni de Wrath Of The Gods.")
-                        Exit Sub
-                    End If
+                Else
+                    Call EnvoyerMauvaisMessage(index, "Votre compte est banni de Wrath Of The Gods.")
+                    Exit Sub
+                End If
             Else
                 Call EnvoyerMauvaisMessage(index, "Le compte n'existe pas.")
                 Exit Sub
