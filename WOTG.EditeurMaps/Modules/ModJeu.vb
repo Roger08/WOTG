@@ -11,13 +11,14 @@ Module ModJeu
 
     ' - Initialisation du moteur graphique
     Public Sub InitGraph()
-        'FenetreRendu = New RenderWindow(frmEditeur.PicJeu.Handle)
-        'FenetreRendu.SetFramerateLimit(50)
+        FenetreRendu = New RenderWindow(frmEditeur.PicJeu.Handle)
+        FenetreRendu.SetFramerateLimit(50)
 
         ReDim Map(MAX_MAPS)
         For i = 0 To MAX_MAPS
             ReDim Map(i).Cases(MAX_MAPX, MAX_MAPY)
         Next
+        ReDim imgTiles(255)
 
         ' - Chargement des fichiers
         Call ChargerTiles()
@@ -39,6 +40,7 @@ Module ModJeu
 
         ' Chargement des données binaires depuis FTP
 
+        frmEditeur.tmrFPS.Enabled = True
         EnJeu = True
     End Sub
 
@@ -58,6 +60,7 @@ Module ModJeu
                 imgTiles(i) = New Texture(Application.StartupPath & "/Graphique/Tilesets/" & i & ".png")
                 frmEditeur.lstTiles.Items.Add("Tilesets/" & i & ".png")
             Else
+                TotalTiles = (i - 1)
                 Exit For
             End If
         Next
@@ -77,6 +80,12 @@ Module ModJeu
             Call RecevoirPaquets()
 
             ' Affichage graphique
+            If EnJeu Then
+                FenetreRendu.Clear(New Color(160, 160, 160))
+
+                FenetreRendu.Display()
+                FPS += 1
+            End If
 
             Application.DoEvents()
         End While

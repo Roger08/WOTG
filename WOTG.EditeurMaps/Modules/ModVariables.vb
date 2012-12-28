@@ -63,11 +63,19 @@ Module ModVariables
 
     ' - Variables diverses
     Public VersionEditeur As String = "0.0.1"
-    Public MapActuelle As Integer
-    Public EnJeu As Boolean = False
     Public FTP As String = "hugo.m57.free.fr"
     Public FTPPass As String = "froggy"
     Public TotalTiles As Byte
+    Public FPS As Byte
+
+    ' - Variables d'édition
+    Public MapActuelle As Integer
+    Public CoucheActuelle As Byte
+    Public EnJeu As Boolean = False
+    Public PicscreenX As Byte
+    Public PicscreenY As Byte
+    Public TileX As Byte
+    Public TileY As Byte
 
 #Region "Strutures"
 

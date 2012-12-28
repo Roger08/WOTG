@@ -22,6 +22,7 @@ Partial Class frmEditeur
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditeur))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.picTiles = New System.Windows.Forms.PictureBox()
@@ -71,6 +72,7 @@ Partial Class frmEditeur
         Me.SuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Supérieur2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Supérieur3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tmrFPS = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         CType(Me.picTiles, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicJeu, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -348,7 +350,7 @@ Partial Class frmEditeur
         'QuitterToolStripMenuItem
         '
         Me.QuitterToolStripMenuItem.Name = "QuitterToolStripMenuItem"
-        Me.QuitterToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.QuitterToolStripMenuItem.Size = New System.Drawing.Size(111, 22)
         Me.QuitterToolStripMenuItem.Text = "Quitter"
         '
         'MapToolStripMenuItem
@@ -438,6 +440,10 @@ Partial Class frmEditeur
         Me.Supérieur3ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.Supérieur3ToolStripMenuItem.Text = "Supérieur 3"
         '
+        'tmrFPS
+        '
+        Me.tmrFPS.Interval = 1000
+        '
         'frmEditeur
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -517,4 +523,5 @@ Partial Class frmEditeur
     Friend WithEvents Supérieur2ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Supérieur3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents picTiles As System.Windows.Forms.PictureBox
+    Friend WithEvents tmrFPS As System.Windows.Forms.Timer
 End Class
