@@ -78,6 +78,7 @@ Module ModVariables
     Public TileClic As Short
     Public PicscreenClic As Boolean
     Public Gomme As Boolean
+    Public Grille As Boolean = True
 
 #Region "Strutures"
 

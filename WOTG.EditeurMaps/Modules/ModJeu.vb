@@ -60,10 +60,12 @@ Module ModJeu
                 imgTiles(i) = New Texture(Application.StartupPath & "/Graphique/Tilesets/" & i & ".png")
                 frmEditeur.lstTiles.Items.Add("Tilesets/" & i & ".png")
             Else
-                TotalTiles = (i - 1)
+                TotalTiles = i
                 Exit For
             End If
         Next
+
+        imgTiles(TotalTiles) = New Texture(Application.StartupPath & "/Graphique/Tilesets/Outils.png")
 
         frmEditeur.lstTiles.Items.Add("Attributs")
 
@@ -134,11 +136,30 @@ Module ModJeu
                     Next
                 Next
 
-            FenetreRendu.Display()
-            FPS += 1
+                ' Affichage de la grille
+                If Grille Then
+                    Call AfficherGrille()
+                End If
+
+                ' Affichage du tiles selectionné ou des attributs
+                If Not frmEditeur.lstTiles.Text = "Attributs" Then
+                    Call AfficherPreviTiles()
+                Else
+                    For x = 0 To MAX_MAPY
+                        For y = 0 To MAX_MAPX
+                            If Not x < 0 And Not x > 30 And Not y < 0 And Not y > 30 Then
+                                'Call DessinerAttribut(Map(MapActuelle).Cases(x, y).Attribut, x - Camera.X, y - Camera.Y)
+                            End If
+                        Next
+                    Next
+                End If
+
+                FenetreRendu.Display()
+                FPS += 1
+
             End If
 
-            Application.DoEvents()
+                Application.DoEvents()
         End While
 
         MsgBox("Connexion avec le serveur perdue ! Merci de le signaler à l'équipe du jeu.", MsgBoxStyle.Critical, "Erreur fatale")
@@ -186,6 +207,35 @@ Module ModJeu
         sprtTiles.TextureRect = New IntRect(tX * 32, tY * 32, 32, 32)
         sprtTiles.Position = New Vector2f(X * 32, Y * 32)
         FenetreRendu.Draw(sprtTiles)
+        sprtTiles.Dispose()
+    End Sub
+
+    ' - Prévisualisation du tiles avec alpha
+    Sub AfficherPreviTiles()
+        sprtTiles = New Sprite(imgTiles(frmEditeur.lstTiles.SelectedIndex))
+
+        With sprtTiles
+            .Position = New Vector2f(PicscreenX * 32, PicscreenY * 32)
+            .TextureRect = New IntRect(RecSelect.Left, RecSelect.Top, RecSelect.Width, RecSelect.Height)
+            .Color = New Color(255, 255, 255, 150)
+        End With
+
+        FenetreRendu.Draw(sprtTiles)
+        sprtTiles.Dispose()
+    End Sub
+
+    ' - Dessine la grille sur la map
+    Sub AfficherGrille()
+        sprtTiles = New Sprite(imgTiles(TotalTiles))
+        sprtTiles.TextureRect = New IntRect(0, 0, 32, 32)
+
+        For x = 0 To MAX_MAPX
+            For y = 0 To MAX_MAPY
+                sprtTiles.Position = New Vector2f(x * 32, y * 32)
+                FenetreRendu.Draw(sprtTiles)
+            Next
+        Next
+
         sprtTiles.Dispose()
     End Sub
 #End Region

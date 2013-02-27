@@ -64,6 +64,17 @@
         End If
     End Sub
 
+    ' - Grille
+    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
+        If Grille Then
+            Grille = False
+            ToolStripButton5.Checked = False
+        Else
+            Grille = True
+            ToolStripButton5.Checked = True
+        End If
+    End Sub
+
     ' - Affichage des FPS
     Private Sub tmrFPS_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrFPS.Tick
         lblFPS.Text = "FPS : " & FPS
