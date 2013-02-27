@@ -107,7 +107,6 @@ Module ModJeu
                                     Call AfficherCase(MapActuelle, x, y, 3)
                                 End If
 
-
                             End With
                         End If
                     Next
@@ -208,6 +207,7 @@ Module ModJeu
         sprtTiles.Position = New Vector2f(X * 32, Y * 32)
         FenetreRendu.Draw(sprtTiles)
         sprtTiles.Dispose()
+
     End Sub
 
     ' - Prévisualisation du tiles avec alpha
