@@ -125,19 +125,19 @@ Public Class Structures
         Dim AttributString1 As String
         Dim AttributString2 As String
         Dim SolSet As Byte
-        Dim Sol As Long
+        Dim Sol As Short
         Dim Inf1Set As Byte
-        Dim Inf1 As Long
+        Dim Inf1 As Short
         Dim Inf2Set As Byte
-        Dim Inf2 As Long
+        Dim Inf2 As Short
         Dim Inf3Set As Byte
-        Dim Inf3 As Long
+        Dim Inf3 As Short
         Dim Sup1Set As Byte
-        Dim Sup1 As Long
+        Dim Sup1 As Short
         Dim Sup2Set As Byte
-        Dim Sup2 As Long
+        Dim Sup2 As Short
         Dim Sup3Set As Byte
-        Dim Sup3 As Long
+        Dim Sup3 As Short
     End Structure
 
     <Serializable()>

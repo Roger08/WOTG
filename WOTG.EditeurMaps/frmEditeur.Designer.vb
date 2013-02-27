@@ -64,6 +64,7 @@ Partial Class frmEditeur
         Me.ScreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EcranActuelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MapEntièreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RechercherToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CoucheToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SolToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Inf1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -355,7 +356,7 @@ Partial Class frmEditeur
         '
         'MapToolStripMenuItem
         '
-        Me.MapToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActualiserToolStripMenuItem, Me.ProprietésToolStripMenuItem, Me.ScreenshotToolStripMenuItem})
+        Me.MapToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActualiserToolStripMenuItem, Me.ProprietésToolStripMenuItem, Me.ScreenshotToolStripMenuItem, Me.RechercherToolStripMenuItem})
         Me.MapToolStripMenuItem.Name = "MapToolStripMenuItem"
         Me.MapToolStripMenuItem.Size = New System.Drawing.Size(43, 20)
         Me.MapToolStripMenuItem.Text = "Map"
@@ -363,20 +364,20 @@ Partial Class frmEditeur
         'ActualiserToolStripMenuItem
         '
         Me.ActualiserToolStripMenuItem.Name = "ActualiserToolStripMenuItem"
-        Me.ActualiserToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.ActualiserToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.ActualiserToolStripMenuItem.Text = "Actualiser"
         '
         'ProprietésToolStripMenuItem
         '
         Me.ProprietésToolStripMenuItem.Name = "ProprietésToolStripMenuItem"
-        Me.ProprietésToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.ProprietésToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.ProprietésToolStripMenuItem.Text = "Proprietés"
         '
         'ScreenshotToolStripMenuItem
         '
         Me.ScreenshotToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EcranActuelToolStripMenuItem, Me.MapEntièreToolStripMenuItem})
         Me.ScreenshotToolStripMenuItem.Name = "ScreenshotToolStripMenuItem"
-        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.ScreenshotToolStripMenuItem.Text = "Screenshot"
         '
         'EcranActuelToolStripMenuItem
@@ -390,6 +391,12 @@ Partial Class frmEditeur
         Me.MapEntièreToolStripMenuItem.Name = "MapEntièreToolStripMenuItem"
         Me.MapEntièreToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
         Me.MapEntièreToolStripMenuItem.Text = "Map entière"
+        '
+        'RechercherToolStripMenuItem
+        '
+        Me.RechercherToolStripMenuItem.Name = "RechercherToolStripMenuItem"
+        Me.RechercherToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.RechercherToolStripMenuItem.Text = "Rechercher"
         '
         'CoucheToolStripMenuItem
         '
@@ -524,4 +531,5 @@ Partial Class frmEditeur
     Friend WithEvents Supérieur3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents picTiles As System.Windows.Forms.PictureBox
     Friend WithEvents tmrFPS As System.Windows.Forms.Timer
+    Friend WithEvents RechercherToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

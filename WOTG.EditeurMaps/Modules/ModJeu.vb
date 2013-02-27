@@ -83,8 +83,59 @@ Module ModJeu
             If EnJeu Then
                 FenetreRendu.Clear(New Color(160, 160, 160))
 
-                FenetreRendu.Display()
-                FPS += 1
+                ' Affichage des couches inférieures
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        If Not x < 0 And Not x > 30 And Not y < 0 And Not y > 30 Then
+                            With Map(MapActuelle).Cases(x, y)
+
+                                If .Sol <> 0 Then
+                                    Call AfficherCase(MapActuelle, x, y, 0)
+                                End If
+
+                                If .Inf1 <> 0 Then
+                                    Call AfficherCase(MapActuelle, x, y, 1)
+                                End If
+
+                                If .Inf2 <> 0 Then
+                                    Call AfficherCase(MapActuelle, x, y, 2)
+                                End If
+
+                                If .Inf3 <> 0 Then
+                                    Call AfficherCase(MapActuelle, x, y, 3)
+                                End If
+
+
+                            End With
+                        End If
+                    Next
+                Next
+
+                ' Affichage des couches supérieures
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        If Not x < 0 And Not x > 30 And Not y < 0 And Not y > 30 Then
+                            With Map(MapActuelle).Cases(x, y)
+
+                                If .Sup1 <> 0 Then
+                                    Call AfficherCase(MapActuelle, x, y, 4)
+                                End If
+
+                                If .Sup2 <> 0 Then
+                                    Call AfficherCase(MapActuelle, x, y, 5)
+                                End If
+
+                                If .Sup3 <> 0 Then
+                                    Call AfficherCase(MapActuelle, x, y, 6)
+                                End If
+
+                            End With
+                        End If
+                    Next
+                Next
+
+            FenetreRendu.Display()
+            FPS += 1
             End If
 
             Application.DoEvents()
@@ -93,5 +144,50 @@ Module ModJeu
         MsgBox("Connexion avec le serveur perdue ! Merci de le signaler à l'équipe du jeu.", MsgBoxStyle.Critical, "Erreur fatale")
         End
     End Sub
+
+#Region "Fonctions graphiques diverses"
+
+    ' - Affichage d'une case sur la map
+    Public Sub AfficherCase(ByVal mapnum As Integer, ByVal X As Byte, ByVal Y As Byte, ByVal Couche As Byte)
+        Dim tX As Byte
+        Dim tY As Byte
+
+        Select Case Couche
+            Case 0 ' Sol
+                sprtTiles = New Sprite(imgTiles(Map(mapnum).Cases(X, Y).SolSet))
+                tX = DecodeX(Map(mapnum).Cases(X, Y).Sol)
+                tY = DecodeY(Map(mapnum).Cases(X, Y).Sol)
+            Case 1 ' Inf1
+                sprtTiles = New Sprite(imgTiles(Map(mapnum).Cases(X, Y).Inf1Set))
+                tX = DecodeX(Map(mapnum).Cases(X, Y).Inf1)
+                tY = DecodeY(Map(mapnum).Cases(X, Y).Inf1)
+            Case 2 ' Inf2
+                sprtTiles = New Sprite(imgTiles(Map(mapnum).Cases(X, Y).Inf2Set))
+                tX = DecodeX(Map(mapnum).Cases(X, Y).Inf2)
+                tY = DecodeY(Map(mapnum).Cases(X, Y).Inf2)
+            Case 3 ' Inf3
+                sprtTiles = New Sprite(imgTiles(Map(mapnum).Cases(X, Y).Inf3Set))
+                tX = DecodeX(Map(mapnum).Cases(X, Y).Inf3)
+                tY = DecodeY(Map(mapnum).Cases(X, Y).Inf3)
+            Case 4 ' Sup1
+                sprtTiles = New Sprite(imgTiles(Map(mapnum).Cases(X, Y).Sup1Set))
+                tX = DecodeX(Map(mapnum).Cases(X, Y).Sup1)
+                tY = DecodeY(Map(mapnum).Cases(X, Y).Sup1)
+            Case 5 ' Sup2
+                sprtTiles = New Sprite(imgTiles(Map(mapnum).Cases(X, Y).Sup2Set))
+                tX = DecodeX(Map(mapnum).Cases(X, Y).Sup2)
+                tY = DecodeY(Map(mapnum).Cases(X, Y).Sup2)
+            Case 6 ' Sup3
+                sprtTiles = New Sprite(imgTiles(Map(mapnum).Cases(X, Y).Sup3Set))
+                tX = DecodeX(Map(mapnum).Cases(X, Y).Sup3)
+                tY = DecodeY(Map(mapnum).Cases(X, Y).Sup3)
+        End Select
+
+        sprtTiles.TextureRect = New IntRect(tX * 32, tY * 32, 32, 32)
+        sprtTiles.Position = New Vector2f(X * 32, Y * 32)
+        FenetreRendu.Draw(sprtTiles)
+        sprtTiles.Dispose()
+    End Sub
+#End Region
 
 End Module

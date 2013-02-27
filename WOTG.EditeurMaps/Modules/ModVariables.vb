@@ -76,6 +76,8 @@ Module ModVariables
     Public PicscreenY As Byte
     Public TileCliqué As Boolean
     Public TileClic As Short
+    Public PicscreenClic As Boolean
+    Public Gomme As Boolean
 
 #Region "Strutures"
 
