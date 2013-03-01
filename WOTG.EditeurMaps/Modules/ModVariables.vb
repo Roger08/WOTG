@@ -70,6 +70,7 @@ Module ModVariables
     Public FTPPass As String = "froggy"
     Public TotalTiles As Byte
     Public FPS As Byte
+    Public Minuteur As Byte
 
     ' - Variables d'édition
     Public MapActuelle As Integer

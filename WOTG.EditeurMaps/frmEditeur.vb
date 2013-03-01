@@ -53,33 +53,48 @@
             ToolStripButton12.Enabled = False
         End If
     End Sub
-    ' - Gomme
-    Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
-        If Gomme Then
-            ToolStripButton3.Checked = False
-            Gomme = False
-        Else
-            ToolStripButton3.Checked = True
-            Gomme = True
-        End If
-    End Sub
-
-    ' - Grille
-    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
-        If Grille Then
-            Grille = False
-            ToolStripButton5.Checked = False
-        Else
-            Grille = True
-            ToolStripButton5.Checked = True
-        End If
-    End Sub
 
     ' - Affichage des FPS
     Private Sub tmrFPS_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrFPS.Tick
         lblFPS.Text = "FPS : " & FPS
         FPS = 0
+
+        If Minuteur = 180 Then
+            EnJeu = False
+            lblStatut.Text = "En veille"
+            lblStatut.ForeColor = Drawing.Color.Red
+        Else
+            Minuteur += 1
+        End If
     End Sub
+
+    ' - Force l'éditeur à passer en basse consommation
+    Private Sub MettreEnVeilleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MettreEnVeilleToolStripMenuItem.Click
+        If EnJeu Then
+            EnJeu = False
+            lblStatut.Text = "En veille"
+            lblStatut.ForeColor = Drawing.Color.Red
+        End If
+    End Sub
+
+    ' - Force l'éditeur à passer en basse consommation
+    Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton14.Click
+        If EnJeu Then
+            EnJeu = False
+            lblStatut.Text = "En veille"
+            lblStatut.ForeColor = Drawing.Color.Red
+        End If
+    End Sub
+
+#Region "Gestion des touches"
+
+    Private Sub lstTiles_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lstTiles.KeyDown
+        Select Case e.KeyCode
+
+        End Select
+    End Sub
+
+#End Region
 
 #Region "Gestion PicJeu"
 
@@ -97,6 +112,15 @@
         PicscreenY = Int(e.Y / 32)
 
         lblPosition.Text = ("X : " & PicscreenX & " Y : " & PicscreenY)
+
+        ' Indique l'activité de l'utilisateur
+        Minuteur = 0
+        If Not EnJeu Then
+            EnJeu = True
+            lblStatut.Text = "Actif"
+            lblStatut.ForeColor = Drawing.Color.Green
+        End If
+
 
         ' - Si la souris est baissé
         If PicscreenClic Then
@@ -351,6 +375,134 @@
 
 #Region "Fonctions de mapping"
 
+    ' - Gomme
+    Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
+        If Gomme Then
+            ToolStripButton3.Checked = False
+            Gomme = False
+        Else
+            ToolStripButton3.Checked = True
+            Gomme = True
+        End If
+    End Sub
+
+    ' - Grille
+    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
+        If Grille Then
+            Grille = False
+            ToolStripButton5.Checked = False
+        Else
+            Grille = True
+            ToolStripButton5.Checked = True
+        End If
+    End Sub
+
+    ' - Affichage de la grille
+    Private Sub GrilleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GrilleToolStripMenuItem.Click
+        If Grille Then
+            Grille = False
+            ToolStripButton5.Checked = False
+        Else
+            Grille = True
+            ToolStripButton5.Checked = True
+        End If
+    End Sub
+
+    ' - Remplissage d'une couche
+    Private Sub RemplirToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RemplirToolStripMenuItem.Click
+        If MsgBox("Êtes-vous sur de vouloir remplir la couche ?", vbYesNo, "Attention") = MsgBoxResult.Yes Then
+            For x = 0 To MAX_MAPX
+                For y = 0 To MAX_MAPY
+                    Call PlacerTiles(x, y)
+                Next
+            Next
+            Call DessinerCouche(CoucheActuelle)
+        End If
+    End Sub
+
+    ' - Vidage d'une couche
+    Private Sub ViderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ViderToolStripMenuItem.Click
+        If MsgBox("Êtes-vous sur de vouloir vider la couche ?", MsgBoxStyle.YesNo, "Attention") = MsgBoxResult.Yes Then
+            If CoucheActuelle = 0 Then ' Sol
+
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        With Map(MapActuelle).Cases(x, y)
+                            .SolSet = 0
+                            .Sol = 0
+                        End With
+                    Next
+                Next
+
+            ElseIf CoucheActuelle = 1 Then ' Inf 1
+
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        With Map(MapActuelle).Cases(x, y)
+                            .Inf1Set = 0
+                            .Inf1 = 0
+                        End With
+                    Next
+                Next
+
+            ElseIf CoucheActuelle = 2 Then ' Inf 2
+
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        With Map(MapActuelle).Cases(x, y)
+                            .Inf2Set = 0
+                            .Inf2 = 0
+                        End With
+                    Next
+                Next
+
+            ElseIf CoucheActuelle = 3 Then ' Inf 3
+
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        With Map(MapActuelle).Cases(x, y)
+                            .Inf3Set = 0
+                            .Inf3 = 0
+                        End With
+                    Next
+                Next
+
+            ElseIf CoucheActuelle = 4 Then ' Sup 1
+
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        With Map(MapActuelle).Cases(x, y)
+                            .Sup1Set = 0
+                            .Sup1 = 0
+                        End With
+                    Next
+                Next
+
+            ElseIf CoucheActuelle = 5 Then ' Sup 2
+
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        With Map(MapActuelle).Cases(x, y)
+                            .Sup2Set = 0
+                            .Sup2 = 0
+                        End With
+                    Next
+                Next
+
+            ElseIf CoucheActuelle = 6 Then ' Sup 3
+
+                For x = 0 To MAX_MAPX
+                    For y = 0 To MAX_MAPY
+                        With Map(MapActuelle).Cases(x, y)
+                            .Sup3Set = 0
+                            .Sup3 = 0
+                        End With
+                    Next
+                Next
+            End If
+        End If
+        Call DessinerCouche(CoucheActuelle)
+    End Sub
     ' - Remplissage d'une couche
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
         If MsgBox("Êtes-vous sur de vouloir remplir la couche ?", vbYesNo, "Attention") = MsgBoxResult.Yes Then

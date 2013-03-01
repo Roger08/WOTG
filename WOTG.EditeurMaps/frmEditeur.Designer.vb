@@ -51,12 +51,17 @@ Partial Class frmEditeur
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton14 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblPosition = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblFPS = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblStatut = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FichierToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MettreEnVeilleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MapToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActualiserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -74,7 +79,12 @@ Partial Class frmEditeur
         Me.Sup2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Sup3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrFPS = New System.Windows.Forms.Timer(Me.components)
-        Me.MettreEnVeilleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SauvegarderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AffichageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GrilleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RemplirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         CType(Me.picTiles, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicJeu, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,7 +141,7 @@ Partial Class frmEditeur
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnregistrerToolStripButton, Me.ToolStripSeparator1, Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripSeparator3, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripButton5, Me.ToolStripSeparator2, Me.ToolStripButton6, Me.ToolStripSeparator4, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripButton9, Me.ToolStripSeparator5, Me.ToolStripButton10, Me.ToolStripButton11, Me.ToolStripButton12, Me.ToolStripSeparator6, Me.ToolStripButton13, Me.ToolStripSeparator7})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EnregistrerToolStripButton, Me.ToolStripSeparator1, Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripSeparator3, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripButton5, Me.ToolStripSeparator2, Me.ToolStripButton6, Me.ToolStripSeparator4, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripButton9, Me.ToolStripSeparator5, Me.ToolStripButton10, Me.ToolStripButton11, Me.ToolStripButton12, Me.ToolStripSeparator6, Me.ToolStripButton13, Me.ToolStripSeparator7, Me.ToolStripButton14, Me.ToolStripSeparator8})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(836, 25)
@@ -145,7 +155,8 @@ Partial Class frmEditeur
         Me.EnregistrerToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.EnregistrerToolStripButton.Name = "EnregistrerToolStripButton"
         Me.EnregistrerToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.EnregistrerToolStripButton.Text = "&Enregistrer"
+        Me.EnregistrerToolStripButton.Text = "Enregistrer"
+        Me.EnregistrerToolStripButton.ToolTipText = "Enregistrer (Ctrl+S)"
         '
         'ToolStripSeparator1
         '
@@ -160,7 +171,7 @@ Partial Class frmEditeur
         Me.ToolStripButton1.Name = "ToolStripButton1"
         Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "ToolStripButton1"
-        Me.ToolStripButton1.ToolTipText = "Remplir la couche"
+        Me.ToolStripButton1.ToolTipText = "Remplir la couche (R)"
         '
         'ToolStripButton2
         '
@@ -204,7 +215,7 @@ Partial Class frmEditeur
         Me.ToolStripButton5.Name = "ToolStripButton5"
         Me.ToolStripButton5.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton5.Text = "ToolStripButton5"
-        Me.ToolStripButton5.ToolTipText = "Afficher/masquer la grille"
+        Me.ToolStripButton5.ToolTipText = "Afficher/masquer la grille (Ctrl+G)"
         '
         'ToolStripSeparator2
         '
@@ -297,45 +308,77 @@ Partial Class frmEditeur
         Me.ToolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton13.Name = "ToolStripButton13"
         Me.ToolStripButton13.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton13.Text = "Actualiser la map"
+        Me.ToolStripButton13.Text = "Actualiser la map (Ctrl+A)"
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(6, 25)
         '
+        'ToolStripButton14
+        '
+        Me.ToolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton14.Image = CType(resources.GetObject("ToolStripButton14.Image"), System.Drawing.Image)
+        Me.ToolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton14.Name = "ToolStripButton14"
+        Me.ToolStripButton14.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton14.Text = "Mettre en veille"
+        Me.ToolStripButton14.ToolTipText = "Mettre en veille (Ctrl+V)"
+        '
+        'ToolStripSeparator8
+        '
+        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(6, 25)
+        '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblPosition, Me.ToolStripStatusLabel1, Me.lblFPS})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 542)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblPosition, Me.ToolStripStatusLabel1, Me.lblFPS, Me.ToolStripStatusLabel2, Me.lblStatut})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 540)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(836, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(836, 24)
         Me.StatusStrip1.TabIndex = 11
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'lblPosition
         '
         Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(54, 17)
+        Me.lblPosition.Size = New System.Drawing.Size(54, 19)
         Me.lblPosition.Text = "X : 0 Y : 0"
         Me.lblPosition.ToolTipText = "Position du curseur sur le picscreen"
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(19, 17)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(19, 19)
         Me.ToolStripStatusLabel1.Text = "    "
         '
         'lblFPS
         '
         Me.lblFPS.Name = "lblFPS"
-        Me.lblFPS.Size = New System.Drawing.Size(41, 17)
+        Me.lblFPS.Size = New System.Drawing.Size(41, 19)
         Me.lblFPS.Text = "FPS : 0"
         Me.lblFPS.ToolTipText = "Images par seconde"
         '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(19, 19)
+        Me.ToolStripStatusLabel2.Text = "    "
+        '
+        'lblStatut
+        '
+        Me.lblStatut.BackColor = System.Drawing.SystemColors.Control
+        Me.lblStatut.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+                    Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.lblStatut.ForeColor = System.Drawing.Color.Green
+        Me.lblStatut.Name = "lblStatut"
+        Me.lblStatut.Size = New System.Drawing.Size(36, 19)
+        Me.lblStatut.Text = "Actif"
+        '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FichierToolStripMenuItem, Me.MapToolStripMenuItem, Me.CoucheToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FichierToolStripMenuItem, Me.MapToolStripMenuItem, Me.CoucheToolStripMenuItem, Me.AffichageToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(836, 24)
@@ -349,15 +392,23 @@ Partial Class frmEditeur
         Me.FichierToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
         Me.FichierToolStripMenuItem.Text = "Editeur"
         '
+        'MettreEnVeilleToolStripMenuItem
+        '
+        Me.MettreEnVeilleToolStripMenuItem.Name = "MettreEnVeilleToolStripMenuItem"
+        Me.MettreEnVeilleToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
+        Me.MettreEnVeilleToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.MettreEnVeilleToolStripMenuItem.Text = "Mettre en veille"
+        '
         'QuitterToolStripMenuItem
         '
         Me.QuitterToolStripMenuItem.Name = "QuitterToolStripMenuItem"
-        Me.QuitterToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
+        Me.QuitterToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Q), System.Windows.Forms.Keys)
+        Me.QuitterToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.QuitterToolStripMenuItem.Text = "Quitter"
         '
         'MapToolStripMenuItem
         '
-        Me.MapToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ActualiserToolStripMenuItem, Me.ProprietésToolStripMenuItem, Me.ScreenshotToolStripMenuItem, Me.RechercherToolStripMenuItem})
+        Me.MapToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SauvegarderToolStripMenuItem, Me.ActualiserToolStripMenuItem, Me.ProprietésToolStripMenuItem, Me.ScreenshotToolStripMenuItem, Me.RechercherToolStripMenuItem})
         Me.MapToolStripMenuItem.Name = "MapToolStripMenuItem"
         Me.MapToolStripMenuItem.Size = New System.Drawing.Size(43, 20)
         Me.MapToolStripMenuItem.Text = "Map"
@@ -365,43 +416,44 @@ Partial Class frmEditeur
         'ActualiserToolStripMenuItem
         '
         Me.ActualiserToolStripMenuItem.Name = "ActualiserToolStripMenuItem"
-        Me.ActualiserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ActualiserToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+        Me.ActualiserToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.ActualiserToolStripMenuItem.Text = "Actualiser"
         '
         'ProprietésToolStripMenuItem
         '
         Me.ProprietésToolStripMenuItem.Name = "ProprietésToolStripMenuItem"
-        Me.ProprietésToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ProprietésToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.ProprietésToolStripMenuItem.Text = "Proprietés"
         '
         'ScreenshotToolStripMenuItem
         '
         Me.ScreenshotToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EcranActuelToolStripMenuItem, Me.MapEntièreToolStripMenuItem})
         Me.ScreenshotToolStripMenuItem.Name = "ScreenshotToolStripMenuItem"
-        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.ScreenshotToolStripMenuItem.Text = "Screenshot"
         '
         'EcranActuelToolStripMenuItem
         '
         Me.EcranActuelToolStripMenuItem.Name = "EcranActuelToolStripMenuItem"
-        Me.EcranActuelToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
+        Me.EcranActuelToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.EcranActuelToolStripMenuItem.Text = "Ecran de jeu"
         '
         'MapEntièreToolStripMenuItem
         '
         Me.MapEntièreToolStripMenuItem.Name = "MapEntièreToolStripMenuItem"
-        Me.MapEntièreToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
+        Me.MapEntièreToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MapEntièreToolStripMenuItem.Text = "Map entière"
         '
         'RechercherToolStripMenuItem
         '
         Me.RechercherToolStripMenuItem.Name = "RechercherToolStripMenuItem"
-        Me.RechercherToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RechercherToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.RechercherToolStripMenuItem.Text = "Rechercher"
         '
         'CoucheToolStripMenuItem
         '
-        Me.CoucheToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SolToolStripMenuItem, Me.Inf1ToolStripMenuItem, Me.Inf2ToolStripMenuItem, Me.Inf3ToolStripMenuItem, Me.Sup1ToolStripMenuItem, Me.Sup2ToolStripMenuItem, Me.Sup3ToolStripMenuItem})
+        Me.CoucheToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SolToolStripMenuItem, Me.Inf1ToolStripMenuItem, Me.Inf2ToolStripMenuItem, Me.Inf3ToolStripMenuItem, Me.Sup1ToolStripMenuItem, Me.Sup2ToolStripMenuItem, Me.Sup3ToolStripMenuItem, Me.ToolStripSeparator9, Me.RemplirToolStripMenuItem, Me.ViderToolStripMenuItem})
         Me.CoucheToolStripMenuItem.Name = "CoucheToolStripMenuItem"
         Me.CoucheToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.CoucheToolStripMenuItem.Text = "Couche"
@@ -409,54 +461,88 @@ Partial Class frmEditeur
         'SolToolStripMenuItem
         '
         Me.SolToolStripMenuItem.Name = "SolToolStripMenuItem"
-        Me.SolToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SolToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.SolToolStripMenuItem.Text = "Sol"
         '
         'Inf1ToolStripMenuItem
         '
         Me.Inf1ToolStripMenuItem.Name = "Inf1ToolStripMenuItem"
-        Me.Inf1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Inf1ToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.Inf1ToolStripMenuItem.Text = "Inférieur 1"
         '
         'Inf2ToolStripMenuItem
         '
         Me.Inf2ToolStripMenuItem.Name = "Inf2ToolStripMenuItem"
-        Me.Inf2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Inf2ToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.Inf2ToolStripMenuItem.Text = "Inférieur 2"
         '
         'Inf3ToolStripMenuItem
         '
         Me.Inf3ToolStripMenuItem.Name = "Inf3ToolStripMenuItem"
-        Me.Inf3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Inf3ToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.Inf3ToolStripMenuItem.Text = "Inférieur 3"
         '
         'Sup1ToolStripMenuItem
         '
         Me.Sup1ToolStripMenuItem.Name = "Sup1ToolStripMenuItem"
-        Me.Sup1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Sup1ToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.Sup1ToolStripMenuItem.Text = "Supérieur 1"
         '
         'Sup2ToolStripMenuItem
         '
         Me.Sup2ToolStripMenuItem.Name = "Sup2ToolStripMenuItem"
-        Me.Sup2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Sup2ToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.Sup2ToolStripMenuItem.Text = "Supérieur 2"
         '
         'Sup3ToolStripMenuItem
         '
         Me.Sup3ToolStripMenuItem.Name = "Sup3ToolStripMenuItem"
-        Me.Sup3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Sup3ToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.Sup3ToolStripMenuItem.Text = "Supérieur 3"
         '
         'tmrFPS
         '
         Me.tmrFPS.Interval = 1000
         '
-        'MettreEnVeilleToolStripMenuItem
+        'SauvegarderToolStripMenuItem
         '
-        Me.MettreEnVeilleToolStripMenuItem.Name = "MettreEnVeilleToolStripMenuItem"
-        Me.MettreEnVeilleToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
-        Me.MettreEnVeilleToolStripMenuItem.Text = "Mettre en veille"
+        Me.SauvegarderToolStripMenuItem.Name = "SauvegarderToolStripMenuItem"
+        Me.SauvegarderToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.SauvegarderToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.SauvegarderToolStripMenuItem.Text = "Sauvegarder"
+        '
+        'AffichageToolStripMenuItem
+        '
+        Me.AffichageToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GrilleToolStripMenuItem})
+        Me.AffichageToolStripMenuItem.Name = "AffichageToolStripMenuItem"
+        Me.AffichageToolStripMenuItem.Size = New System.Drawing.Size(70, 20)
+        Me.AffichageToolStripMenuItem.Text = "Affichage"
+        '
+        'GrilleToolStripMenuItem
+        '
+        Me.GrilleToolStripMenuItem.Name = "GrilleToolStripMenuItem"
+        Me.GrilleToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.G), System.Windows.Forms.Keys)
+        Me.GrilleToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GrilleToolStripMenuItem.Text = "Grille"
+        '
+        'ToolStripSeparator9
+        '
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(163, 6)
+        '
+        'RemplirToolStripMenuItem
+        '
+        Me.RemplirToolStripMenuItem.Name = "RemplirToolStripMenuItem"
+        Me.RemplirToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.RemplirToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.RemplirToolStripMenuItem.Text = "Remplir"
+        '
+        'ViderToolStripMenuItem
+        '
+        Me.ViderToolStripMenuItem.Name = "ViderToolStripMenuItem"
+        Me.ViderToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.E), System.Windows.Forms.Keys)
+        Me.ViderToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.ViderToolStripMenuItem.Text = "Vider"
         '
         'frmEditeur
         '
@@ -540,4 +626,14 @@ Partial Class frmEditeur
     Friend WithEvents tmrFPS As System.Windows.Forms.Timer
     Friend WithEvents RechercherToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MettreEnVeilleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripStatusLabel2 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents lblStatut As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripButton14 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents SauvegarderToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AffichageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GrilleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents RemplirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ViderToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
