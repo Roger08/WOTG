@@ -82,6 +82,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmInformations.Designer.vb">
+      <DependentUpon>frmInformations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInformations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmChargement.Designer.vb">
       <DependentUpon>frmChargement.vb</DependentUpon>
     </Compile>
@@ -99,6 +105,12 @@
     </Compile>
     <Compile Include="frmLogin.Designer.vb">
       <DependentUpon>frmLogin.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSauvegardeMap.Designer.vb">
+      <DependentUpon>frmSauvegardeMap.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSauvegardeMap.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\ModBDD.vb" />
@@ -125,6 +137,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmInformations.resx">
+      <DependentUpon>frmInformations.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChargement.resx">
       <DependentUpon>frmChargement.vb</DependentUpon>
     </EmbeddedResource>
@@ -133,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSauvegardeMap.resx">
+      <DependentUpon>frmSauvegardeMap.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

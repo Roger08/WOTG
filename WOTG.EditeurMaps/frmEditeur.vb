@@ -90,6 +90,26 @@
 
     Private Sub lstTiles_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lstTiles.KeyDown
         Select Case e.KeyCode
+            Case Keys.D1
+                Call ChangeCouche0()
+
+            Case Keys.D2
+                Call ChangeCouche1()
+
+            Case Keys.D3
+                Call ChangeCouche2()
+
+            Case Keys.D4
+                Call ChangeCouche3()
+
+            Case Keys.D5
+                Call ChangeCouche4()
+
+            Case Keys.D6
+                Call ChangeCouche5()
+
+            Case Keys.D7
+                Call ChangeCouche6()
 
         End Select
     End Sub
@@ -785,4 +805,15 @@
 
 #End Region
 
+    Private Sub InformatiosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InformatiosToolStripMenuItem.Click
+        frmInformations.Show()
+    End Sub
+
+    Private Sub SauvegarderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SauvegarderToolStripMenuItem.Click
+        frmSauvegardeMap.Show()
+    End Sub
+
+    Private Sub EnregistrerToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnregistrerToolStripButton.Click
+        frmSauvegardeMap.Show()
+    End Sub
 End Class

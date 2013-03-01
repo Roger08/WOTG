@@ -16,3 +16,5 @@ C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurM
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\bin\Debug\sfmlnet-graphics-2.dll
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\bin\Debug\sfmlnet-window-2.dll
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurMaps.frmChargement.resources
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurMaps.frmInformations.resources
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurMaps.frmSauvegardeMap.resources
