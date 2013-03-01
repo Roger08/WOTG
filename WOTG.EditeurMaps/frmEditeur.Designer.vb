@@ -70,10 +70,11 @@ Partial Class frmEditeur
         Me.Inf1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Inf2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Inf3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Supérieur2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Supérieur3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sup1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sup2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Sup3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrFPS = New System.Windows.Forms.Timer(Me.components)
+        Me.MettreEnVeilleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         CType(Me.picTiles, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicJeu, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -343,15 +344,15 @@ Partial Class frmEditeur
         '
         'FichierToolStripMenuItem
         '
-        Me.FichierToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.QuitterToolStripMenuItem})
+        Me.FichierToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MettreEnVeilleToolStripMenuItem, Me.QuitterToolStripMenuItem})
         Me.FichierToolStripMenuItem.Name = "FichierToolStripMenuItem"
-        Me.FichierToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
-        Me.FichierToolStripMenuItem.Text = "Fichier"
+        Me.FichierToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
+        Me.FichierToolStripMenuItem.Text = "Editeur"
         '
         'QuitterToolStripMenuItem
         '
         Me.QuitterToolStripMenuItem.Name = "QuitterToolStripMenuItem"
-        Me.QuitterToolStripMenuItem.Size = New System.Drawing.Size(111, 22)
+        Me.QuitterToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
         Me.QuitterToolStripMenuItem.Text = "Quitter"
         '
         'MapToolStripMenuItem
@@ -364,20 +365,20 @@ Partial Class frmEditeur
         'ActualiserToolStripMenuItem
         '
         Me.ActualiserToolStripMenuItem.Name = "ActualiserToolStripMenuItem"
-        Me.ActualiserToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.ActualiserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ActualiserToolStripMenuItem.Text = "Actualiser"
         '
         'ProprietésToolStripMenuItem
         '
         Me.ProprietésToolStripMenuItem.Name = "ProprietésToolStripMenuItem"
-        Me.ProprietésToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.ProprietésToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ProprietésToolStripMenuItem.Text = "Proprietés"
         '
         'ScreenshotToolStripMenuItem
         '
         Me.ScreenshotToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EcranActuelToolStripMenuItem, Me.MapEntièreToolStripMenuItem})
         Me.ScreenshotToolStripMenuItem.Name = "ScreenshotToolStripMenuItem"
-        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ScreenshotToolStripMenuItem.Text = "Screenshot"
         '
         'EcranActuelToolStripMenuItem
@@ -395,12 +396,12 @@ Partial Class frmEditeur
         'RechercherToolStripMenuItem
         '
         Me.RechercherToolStripMenuItem.Name = "RechercherToolStripMenuItem"
-        Me.RechercherToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.RechercherToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RechercherToolStripMenuItem.Text = "Rechercher"
         '
         'CoucheToolStripMenuItem
         '
-        Me.CoucheToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SolToolStripMenuItem, Me.Inf1ToolStripMenuItem, Me.Inf2ToolStripMenuItem, Me.Inf3ToolStripMenuItem, Me.SuToolStripMenuItem, Me.Supérieur2ToolStripMenuItem, Me.Supérieur3ToolStripMenuItem})
+        Me.CoucheToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SolToolStripMenuItem, Me.Inf1ToolStripMenuItem, Me.Inf2ToolStripMenuItem, Me.Inf3ToolStripMenuItem, Me.Sup1ToolStripMenuItem, Me.Sup2ToolStripMenuItem, Me.Sup3ToolStripMenuItem})
         Me.CoucheToolStripMenuItem.Name = "CoucheToolStripMenuItem"
         Me.CoucheToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
         Me.CoucheToolStripMenuItem.Text = "Couche"
@@ -408,48 +409,54 @@ Partial Class frmEditeur
         'SolToolStripMenuItem
         '
         Me.SolToolStripMenuItem.Name = "SolToolStripMenuItem"
-        Me.SolToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.SolToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SolToolStripMenuItem.Text = "Sol"
         '
         'Inf1ToolStripMenuItem
         '
         Me.Inf1ToolStripMenuItem.Name = "Inf1ToolStripMenuItem"
-        Me.Inf1ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.Inf1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Inf1ToolStripMenuItem.Text = "Inférieur 1"
         '
         'Inf2ToolStripMenuItem
         '
         Me.Inf2ToolStripMenuItem.Name = "Inf2ToolStripMenuItem"
-        Me.Inf2ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.Inf2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Inf2ToolStripMenuItem.Text = "Inférieur 2"
         '
         'Inf3ToolStripMenuItem
         '
         Me.Inf3ToolStripMenuItem.Name = "Inf3ToolStripMenuItem"
-        Me.Inf3ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.Inf3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.Inf3ToolStripMenuItem.Text = "Inférieur 3"
         '
-        'SuToolStripMenuItem
+        'Sup1ToolStripMenuItem
         '
-        Me.SuToolStripMenuItem.Name = "SuToolStripMenuItem"
-        Me.SuToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
-        Me.SuToolStripMenuItem.Text = "Supérieur 1"
+        Me.Sup1ToolStripMenuItem.Name = "Sup1ToolStripMenuItem"
+        Me.Sup1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Sup1ToolStripMenuItem.Text = "Supérieur 1"
         '
-        'Supérieur2ToolStripMenuItem
+        'Sup2ToolStripMenuItem
         '
-        Me.Supérieur2ToolStripMenuItem.Name = "Supérieur2ToolStripMenuItem"
-        Me.Supérieur2ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
-        Me.Supérieur2ToolStripMenuItem.Text = "Supérieur 2"
+        Me.Sup2ToolStripMenuItem.Name = "Sup2ToolStripMenuItem"
+        Me.Sup2ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Sup2ToolStripMenuItem.Text = "Supérieur 2"
         '
-        'Supérieur3ToolStripMenuItem
+        'Sup3ToolStripMenuItem
         '
-        Me.Supérieur3ToolStripMenuItem.Name = "Supérieur3ToolStripMenuItem"
-        Me.Supérieur3ToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
-        Me.Supérieur3ToolStripMenuItem.Text = "Supérieur 3"
+        Me.Sup3ToolStripMenuItem.Name = "Sup3ToolStripMenuItem"
+        Me.Sup3ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.Sup3ToolStripMenuItem.Text = "Supérieur 3"
         '
         'tmrFPS
         '
         Me.tmrFPS.Interval = 1000
+        '
+        'MettreEnVeilleToolStripMenuItem
+        '
+        Me.MettreEnVeilleToolStripMenuItem.Name = "MettreEnVeilleToolStripMenuItem"
+        Me.MettreEnVeilleToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
+        Me.MettreEnVeilleToolStripMenuItem.Text = "Mettre en veille"
         '
         'frmEditeur
         '
@@ -526,10 +533,11 @@ Partial Class frmEditeur
     Friend WithEvents Inf1ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Inf2ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Inf3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SuToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Supérieur2ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Supérieur3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Sup1ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Sup2ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Sup3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents picTiles As System.Windows.Forms.PictureBox
     Friend WithEvents tmrFPS As System.Windows.Forms.Timer
     Friend WithEvents RechercherToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MettreEnVeilleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

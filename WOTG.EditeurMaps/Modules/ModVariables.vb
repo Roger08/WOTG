@@ -26,6 +26,8 @@ Module ModVariables
 
     ' - Variables Graphiques
     Public FenetreRendu As RenderWindow
+    Public CoucheRendu(6) As RenderTexture
+    Public CoucheGrille As RenderTexture
     Public imgSprite As Texture
     Public sprtSprite As Sprite
     Public imgTiles() As Texture

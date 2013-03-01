@@ -88,6 +88,7 @@
         PicscreenClic = True
 
         Call PlacerTiles(PicscreenX, PicscreenY)
+        Call DessinerCouche(CoucheActuelle)
     End Sub
 
     ' - Mouvement de la souris sur le picscreen
@@ -100,6 +101,7 @@
         ' - Si la souris est baissé
         If PicscreenClic Then
             Call PlacerTiles(PicscreenX, PicscreenY)
+            Call DessinerCouche(CoucheActuelle)
         End If
     End Sub
 
@@ -150,6 +152,62 @@
 #Region "Changement de couche"
 
     Private Sub ToolStripButton6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton6.Click
+        Call ChangeCouche0()
+    End Sub
+
+    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
+        Call ChangeCouche1()
+    End Sub
+
+    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
+        Call ChangeCouche2()
+    End Sub
+
+    Private Sub ToolStripButton9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton9.Click
+        Call ChangeCouche3()
+    End Sub
+
+    Private Sub ToolStripButton10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton10.Click
+        Call ChangeCouche4()
+    End Sub
+
+    Private Sub ToolStripButton11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton11.Click
+        Call ChangeCouche5()
+    End Sub
+
+    Private Sub ToolStripButton12_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton12.Click
+        Call ChangeCouche6()
+    End Sub
+
+    Private Sub SolToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SolToolStripMenuItem.Click
+        Call ChangeCouche0()
+    End Sub
+
+    Private Sub Inf1ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Inf1ToolStripMenuItem.Click
+        Call ChangeCouche1()
+    End Sub
+
+    Private Sub Inf2ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Inf2ToolStripMenuItem.Click
+        Call ChangeCouche2()
+    End Sub
+
+    Private Sub Inf3ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Inf3ToolStripMenuItem.Click
+        Call ChangeCouche3()
+    End Sub
+
+    Private Sub SuToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Sup1ToolStripMenuItem.Click
+        Call ChangeCouche4()
+    End Sub
+
+    Private Sub Supérieur2ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Sup2ToolStripMenuItem.Click
+        Call ChangeCouche5()
+    End Sub
+
+    Private Sub Supérieur3ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Sup3ToolStripMenuItem.Click
+        Call ChangeCouche6()
+    End Sub
+
+    Private Sub ChangeCouche0()
         CoucheActuelle = 0
 
         ToolStripButton6.Checked = True
@@ -159,9 +217,17 @@
         ToolStripButton10.Checked = False
         ToolStripButton11.Checked = False
         ToolStripButton12.Checked = False
+
+        SolToolStripMenuItem.Checked = True
+        Inf1ToolStripMenuItem.Checked = False
+        Inf2ToolStripMenuItem.Checked = False
+        Inf3ToolStripMenuItem.Checked = False
+        Sup1ToolStripMenuItem.Checked = False
+        Sup2ToolStripMenuItem.Checked = False
+        Sup3ToolStripMenuItem.Checked = False
     End Sub
 
-    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
+    Private Sub ChangeCouche1()
         CoucheActuelle = 1
 
         ToolStripButton6.Checked = False
@@ -171,9 +237,17 @@
         ToolStripButton10.Checked = False
         ToolStripButton11.Checked = False
         ToolStripButton12.Checked = False
+
+        SolToolStripMenuItem.Checked = False
+        Inf1ToolStripMenuItem.Checked = True
+        Inf2ToolStripMenuItem.Checked = False
+        Inf3ToolStripMenuItem.Checked = False
+        Sup1ToolStripMenuItem.Checked = False
+        Sup2ToolStripMenuItem.Checked = False
+        Sup3ToolStripMenuItem.Checked = False
     End Sub
 
-    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
+    Private Sub ChangeCouche2()
         CoucheActuelle = 2
 
         ToolStripButton6.Checked = False
@@ -183,9 +257,17 @@
         ToolStripButton10.Checked = False
         ToolStripButton11.Checked = False
         ToolStripButton12.Checked = False
+
+        SolToolStripMenuItem.Checked = False
+        Inf1ToolStripMenuItem.Checked = False
+        Inf2ToolStripMenuItem.Checked = True
+        Inf3ToolStripMenuItem.Checked = False
+        Sup1ToolStripMenuItem.Checked = False
+        Sup2ToolStripMenuItem.Checked = False
+        Sup3ToolStripMenuItem.Checked = False
     End Sub
 
-    Private Sub ToolStripButton9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton9.Click
+    Private Sub ChangeCouche3()
         CoucheActuelle = 3
 
         ToolStripButton6.Checked = False
@@ -195,9 +277,17 @@
         ToolStripButton10.Checked = False
         ToolStripButton11.Checked = False
         ToolStripButton12.Checked = False
+
+        SolToolStripMenuItem.Checked = False
+        Inf1ToolStripMenuItem.Checked = False
+        Inf2ToolStripMenuItem.Checked = False
+        Inf3ToolStripMenuItem.Checked = True
+        Sup1ToolStripMenuItem.Checked = False
+        Sup2ToolStripMenuItem.Checked = False
+        Sup3ToolStripMenuItem.Checked = False
     End Sub
 
-    Private Sub ToolStripButton10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton10.Click
+    Private Sub ChangeCouche4()
         CoucheActuelle = 4
 
         ToolStripButton6.Checked = False
@@ -207,9 +297,17 @@
         ToolStripButton10.Checked = True
         ToolStripButton11.Checked = False
         ToolStripButton12.Checked = False
+
+        SolToolStripMenuItem.Checked = False
+        Inf1ToolStripMenuItem.Checked = False
+        Inf2ToolStripMenuItem.Checked = False
+        Inf3ToolStripMenuItem.Checked = False
+        Sup1ToolStripMenuItem.Checked = True
+        Sup2ToolStripMenuItem.Checked = False
+        Sup3ToolStripMenuItem.Checked = False
     End Sub
 
-    Private Sub ToolStripButton11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton11.Click
+    Private Sub ChangeCouche5()
         CoucheActuelle = 5
 
         ToolStripButton6.Checked = False
@@ -219,9 +317,17 @@
         ToolStripButton10.Checked = False
         ToolStripButton11.Checked = True
         ToolStripButton12.Checked = False
+
+        SolToolStripMenuItem.Checked = False
+        Inf1ToolStripMenuItem.Checked = False
+        Inf2ToolStripMenuItem.Checked = False
+        Inf3ToolStripMenuItem.Checked = False
+        Sup1ToolStripMenuItem.Checked = False
+        Sup2ToolStripMenuItem.Checked = True
+        Sup3ToolStripMenuItem.Checked = False
     End Sub
 
-    Private Sub ToolStripButton12_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton12.Click
+    Private Sub ChangeCouche6()
         CoucheActuelle = 6
 
         ToolStripButton6.Checked = False
@@ -231,6 +337,14 @@
         ToolStripButton10.Checked = False
         ToolStripButton11.Checked = False
         ToolStripButton12.Checked = True
+
+        SolToolStripMenuItem.Checked = False
+        Inf1ToolStripMenuItem.Checked = False
+        Inf2ToolStripMenuItem.Checked = False
+        Inf3ToolStripMenuItem.Checked = False
+        Sup1ToolStripMenuItem.Checked = False
+        Sup2ToolStripMenuItem.Checked = False
+        Sup3ToolStripMenuItem.Checked = True
     End Sub
 
 #End Region
@@ -245,6 +359,7 @@
                     Call PlacerTiles(x, y)
                 Next
             Next
+            Call DessinerCouche(CoucheActuelle)
         End If
     End Sub
 
@@ -329,6 +444,7 @@
                 Next
             End If
         End If
+        Call DessinerCouche(CoucheActuelle)
     End Sub
 
     ' - Place les tiles selectionnés
@@ -512,6 +628,7 @@
             End If
 
         End If
+
     End Sub
 
 #End Region
