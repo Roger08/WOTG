@@ -10,6 +10,7 @@
         CreationPersonnage
         ' Paquets éditeurs
         EConnexion
+        EMSauvegarde
     End Enum
 
     Public Enum PaquetServeur As Byte
@@ -19,5 +20,6 @@
         EnvoieJoueur
         EnvoieRace
         EnvoieClasse
+        RepEMSauvegarde
     End Enum
 End Module

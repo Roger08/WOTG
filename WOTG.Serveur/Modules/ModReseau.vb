@@ -31,6 +31,7 @@ Module ModReseau
         PaquetHandler.Add(PaquetClient.Inscription, AddressOf Inscription)
         PaquetHandler.Add(PaquetClient.CreationPersonnage, AddressOf CreationPersonnage)
         PaquetHandler.Add(PaquetClient.EConnexion, AddressOf ConnexionEditeur)
+        PaquetHandler.Add(PaquetClient.EMSauvegarde, AddressOf ESauvegarderMap)
     End Sub
 
     ' - Accepte un client de manière asynchrone
@@ -312,6 +313,14 @@ Module ModReseau
             Call EnvoyerMauvaisMessage(index, "Votre version de l'éditeur n'est pas à jour, veuillez utiliser l'updater de l'équipe.")
             Exit Sub
         End If
+    End Sub
+
+    ' - Demande de sauvegarder une map
+    Public Sub ESauvegarderMap(ByVal index As Byte, ByVal Datas As String)
+        ' Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        If Data(2) = MotDePasseMapeurs Then Call EnvoyerPaquet(index, PaquetServeur.RepEMSauvegarde & SEP & Data(1))
     End Sub
 
 #End Region

@@ -55,7 +55,7 @@ Module ModVariables
     Public MAX_MAPS As Integer = 500
     Public MAX_MAPX As Byte = 19
     Public MAX_MAPY As Byte = 15
-    Public MAX_SECTEURS As Integer = 10
+    Public MAX_SECTEURS As Byte = 10
     Public MAX_OBJETS As Integer = 500
     Public MAX_SORTS As Integer = 500
     Public MAX_QUETES As Integer = 500
@@ -71,6 +71,7 @@ Module ModVariables
     Public TotalTiles As Byte
     Public FPS As Byte
     Public Minuteur As Byte
+    Public NomMap() As String
 
     ' - Variables d'édition
     Public MapActuelle As Integer

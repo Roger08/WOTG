@@ -17,5 +17,6 @@
         EnvoieJoueur
         EnvoieRace
         EnvoieClasse
+        RepEMSauvegarde
     End Enum
 End Module

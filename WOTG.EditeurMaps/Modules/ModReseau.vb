@@ -39,6 +39,7 @@ Module ModReseau
         PaquetHandler.Add(PaquetServeur.EnvoieJoueur, AddressOf RecevoirJoueur)
         PaquetHandler.Add(PaquetServeur.EnvoieRace, AddressOf RecevoirRace)
         PaquetHandler.Add(PaquetServeur.EnvoieClasse, AddressOf RecevoirClasse)
+        PaquetHandler.Add(PaquetServeur.RepEMSauvegarde, AddressOf RepSauvegarde)
     End Sub
 
     ' - Deconnecte le client
@@ -185,6 +186,14 @@ Module ModReseau
 
     End Sub
 
+    ' - Réponse sauvegarde d'une map
+    Public Sub RepSauvegarde(ByVal Datas As String)
+        ' Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        frmSauvegardeMap.Close()
+        Call SauvegarderMap(Data(1))
+    End Sub
 #End Region
 
 #Region "Actions necessitant des paquets"
@@ -200,6 +209,11 @@ Module ModReseau
         Else
             MsgBox("Votre pseudo doit faire au moins 3 carractères.", MsgBoxStyle.Critical, "Erreur")
         End If
+    End Sub
+
+    ' - Envoi de la demande de sauvegarde de map
+    Public Sub EnvoiSauvegarde(ByVal mapnum As Integer, ByVal MotDePasse As String)
+        Call EnvoyerPaquet(PaquetClient.EMSauvegarde & SEP & mapnum & SEP & MotDePasse)
     End Sub
 
 #End Region

@@ -816,4 +816,8 @@
     Private Sub EnregistrerToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnregistrerToolStripButton.Click
         frmSauvegardeMap.Show()
     End Sub
+
+    Private Sub lstMaps_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstMaps.SelectedIndexChanged
+        Call ChargerMap(lstMaps.SelectedIndex)
+    End Sub
 End Class

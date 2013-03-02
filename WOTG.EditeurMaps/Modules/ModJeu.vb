@@ -27,6 +27,8 @@ Module ModJeu
 
         ' - Chargement des fichiers
         Call ChargerTiles()
+        Call ChargerNomMaps()
+        Call ChargerMap(MapActuelle)
 
         ' Chargement du moteur de texte
         PoliceJeu = New Font("C:\Windows\Fonts\Arial.ttf")
