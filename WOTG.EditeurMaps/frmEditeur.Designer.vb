@@ -463,6 +463,7 @@ Partial Class frmEditeur
         'RechercherToolStripMenuItem
         '
         Me.RechercherToolStripMenuItem.Name = "RechercherToolStripMenuItem"
+        Me.RechercherToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.RechercherToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.RechercherToolStripMenuItem.Text = "Rechercher"
         '

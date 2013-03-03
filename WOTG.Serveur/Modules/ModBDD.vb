@@ -10,7 +10,17 @@ Module ModBDD
 
     ' - Chargement de la BDD du jeu
     Public Sub ChargerBDD()
-
+        Try
+            For i = 0 To MAX_CLASSES
+                Call ChargerClasse(i)
+            Next
+            Call Success("Classes chargées")
+        Catch
+            Call Erreur("Une erreur est survenue lors du chargement du serveur")
+            Call Show("Appuyez sur une touche pour quitter...")
+            Console.Read()
+            End
+        End Try
     End Sub
 
     ' - Charge en mémoire un joueur
@@ -38,5 +48,37 @@ Module ModBDD
             Serialiseur.Serialize(FluxFichier, Joueur(index))
             FluxFichier.Close()
         End If
+    End Sub
+
+    ' - Chargemement d'une classe
+    Public Sub ChargerClasse(ByVal classenum As Byte)
+        Dim FluxFichier As Stream
+        Dim Deserialiseur As New BinaryFormatter
+
+        If File.Exists("BDD/Classes/Classe" & classenum & ".wotg") Then
+            FluxFichier = File.OpenRead("BDD/Classes/Classe" & classenum & ".wotg")
+            Classe(classenum) = CType(Deserialiseur.Deserialize(FluxFichier), ClasseRec)
+            FluxFichier.Close() : FluxFichier.Dispose()
+        Else
+            Call NettoyerClasse(classenum)
+        End If
+    End Sub
+
+    ' - Nettoyage d'une classe
+    Public Sub NettoyerClasse(ByVal classenum As Byte)
+        With Classe(classenum)
+            .Nom = vbNullString
+            .Description = vbNullString
+        End With
+    End Sub
+
+    ' - Sauvegarde d'une classe
+    Public Sub SauvegarderClasse(ByVal classenum As Byte)
+        Dim FluxFichier As Stream
+        Dim Serialiseur As New BinaryFormatter
+
+        FluxFichier = File.Create("BDD/Classes/Classe" & classenum & ".wotg")
+        Serialiseur.Serialize(FluxFichier, Classe(classenum))
+        FluxFichier.Close()
     End Sub
 End Module

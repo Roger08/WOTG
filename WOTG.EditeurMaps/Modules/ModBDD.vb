@@ -52,15 +52,11 @@ Module ModBDD
         Next
     End Sub
 
-    ' - Charge les maps enregistrée
+    ' - Charge une map enregistrée
     Public Sub ChargerMap(ByVal mapnum As Integer)
         Dim FluxFichier As Stream
         Dim Deserialiseur As New BinaryFormatter
 
-        'Call Statut("Chargement des maps en cours...")
-        'Call StatutMax(MAX_MAPS)
-        'For i = 1 To MAX_MAPS
-        'Call StatutValeur(i)
         Call NettoyerMap(mapnum)
         If File.Exists("Maps/Map" & mapnum & ".wotg") Then
             FluxFichier = File.OpenRead("Maps/Map" & mapnum & ".wotg")
@@ -73,10 +69,6 @@ Module ModBDD
             'FluxFichier.Close() : FluxFichier.Dispose()
         End If
 
-        'frmEditeur.lstMaps.Items.Add(i & " : " & Map(i).Nom)
-        'Application.DoEvents()
-        'Next
-        'frmChargement.Close()
     End Sub
 
     ' - Télécharger une map

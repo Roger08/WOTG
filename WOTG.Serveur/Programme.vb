@@ -7,7 +7,9 @@
         ReDim Classe(MAX_CLASSES)
         ReDim Race(MAX_RACES)
 
+        ' - Chargement du serveur
         Call MOTD()
+        Call ChargerBDD()
         Call Init()
 
         Console.Read()

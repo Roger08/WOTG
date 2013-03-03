@@ -820,4 +820,8 @@
     Private Sub lstMaps_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstMaps.SelectedIndexChanged
         Call ChargerMap(lstMaps.SelectedIndex)
     End Sub
+
+    Private Sub RechercherToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RechercherToolStripMenuItem.Click
+        frmRecherche.Show()
+    End Sub
 End Class

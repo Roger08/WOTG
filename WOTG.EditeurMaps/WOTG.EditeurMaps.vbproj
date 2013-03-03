@@ -107,6 +107,12 @@
       <DependentUpon>frmLogin.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmRecherche.Designer.vb">
+      <DependentUpon>frmRecherche.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecherche.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSauvegardeMap.Designer.vb">
       <DependentUpon>frmSauvegardeMap.vb</DependentUpon>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecherche.resx">
+      <DependentUpon>frmRecherche.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSauvegardeMap.resx">
       <DependentUpon>frmSauvegardeMap.vb</DependentUpon>

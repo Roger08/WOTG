@@ -320,7 +320,12 @@ Module ModReseau
         ' Récupère le corps du paquet
         Dim Data() As String = Datas.Split(SEP)
 
-        If Data(2) = MotDePasseMapeurs Then Call EnvoyerPaquet(index, PaquetServeur.RepEMSauvegarde & SEP & Data(1))
+        If Data(2) = MotDePasseMapeurs Then
+            Call EnvoyerPaquet(index, PaquetServeur.RepEMSauvegarde & SEP & Data(1))
+        Else
+            Call EnvoyerMauvaisMessage(index, "Le mot de passe de sauvegarde est incorrect !")
+        End If
+
     End Sub
 
 #End Region
