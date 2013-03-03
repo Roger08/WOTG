@@ -15,6 +15,12 @@ Module ModBDD
                 Call ChargerClasse(i)
             Next
             Call Success("Classes chargées")
+
+            For i = 0 To MAX_RACES
+                Call Chargerrace(i)
+            Next
+            Call Success("Races chargées")
+
         Catch
             Call Erreur("Une erreur est survenue lors du chargement du serveur")
             Call Show("Appuyez sur une touche pour quitter...")
@@ -61,6 +67,7 @@ Module ModBDD
             FluxFichier.Close() : FluxFichier.Dispose()
         Else
             Call NettoyerClasse(classenum)
+            Call SauvegarderClasse(classenum)
         End If
     End Sub
 
@@ -79,6 +86,39 @@ Module ModBDD
 
         FluxFichier = File.Create("BDD/Classes/Classe" & classenum & ".wotg")
         Serialiseur.Serialize(FluxFichier, Classe(classenum))
+        FluxFichier.Close()
+    End Sub
+
+    ' - Chargemement d'une race
+    Public Sub Chargerrace(ByVal racenum As Byte)
+        Dim FluxFichier As Stream
+        Dim Deserialiseur As New BinaryFormatter
+
+        If File.Exists("BDD/races/race" & racenum & ".wotg") Then
+            FluxFichier = File.OpenRead("BDD/races/race" & racenum & ".wotg")
+            race(racenum) = CType(Deserialiseur.Deserialize(FluxFichier), raceRec)
+            FluxFichier.Close() : FluxFichier.Dispose()
+        Else
+            Call Nettoyerrace(racenum)
+            Call Sauvegarderrace(racenum)
+        End If
+    End Sub
+
+    ' - Nettoyage d'une race
+    Public Sub Nettoyerrace(ByVal racenum As Byte)
+        With race(racenum)
+            .Nom = vbNullString
+            .Description = vbNullString
+        End With
+    End Sub
+
+    ' - Sauvegarde d'une race
+    Public Sub Sauvegarderrace(ByVal racenum As Byte)
+        Dim FluxFichier As Stream
+        Dim Serialiseur As New BinaryFormatter
+
+        FluxFichier = File.Create("BDD/races/race" & racenum & ".wotg")
+        Serialiseur.Serialize(FluxFichier, race(racenum))
         FluxFichier.Close()
     End Sub
 End Module
