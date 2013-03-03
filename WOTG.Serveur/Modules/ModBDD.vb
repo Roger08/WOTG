@@ -21,6 +21,12 @@ Module ModBDD
             Next
             Call Success("Races chargées")
 
+            For i = 0 To MAX_MAPS
+                Call Chargermap(i)
+            Next
+            Call Success("Maps chargées")
+
+            Console.WriteLine()
         Catch
             Call Erreur("Une erreur est survenue lors du chargement du serveur")
             Call Show("Appuyez sur une touche pour quitter...")
@@ -66,7 +72,7 @@ Module ModBDD
             Classe(classenum) = CType(Deserialiseur.Deserialize(FluxFichier), ClasseRec)
             FluxFichier.Close() : FluxFichier.Dispose()
         Else
-            Call NettoyerClasse(classenum)
+            ' Call NettoyerClasse(classenum)
             Call SauvegarderClasse(classenum)
         End If
     End Sub
@@ -94,12 +100,12 @@ Module ModBDD
         Dim FluxFichier As Stream
         Dim Deserialiseur As New BinaryFormatter
 
-        If File.Exists("BDD/races/race" & racenum & ".wotg") Then
-            FluxFichier = File.OpenRead("BDD/races/race" & racenum & ".wotg")
-            race(racenum) = CType(Deserialiseur.Deserialize(FluxFichier), raceRec)
+        If File.Exists("BDD/Races/Race" & racenum & ".wotg") Then
+            FluxFichier = File.OpenRead("BDD/Races/Race" & racenum & ".wotg")
+            Race(racenum) = CType(Deserialiseur.Deserialize(FluxFichier), RaceRec)
             FluxFichier.Close() : FluxFichier.Dispose()
         Else
-            Call Nettoyerrace(racenum)
+            ' Call Nettoyerrace(racenum)
             Call Sauvegarderrace(racenum)
         End If
     End Sub
@@ -109,6 +115,9 @@ Module ModBDD
         With race(racenum)
             .Nom = vbNullString
             .Description = vbNullString
+            .SpawnMap = 0
+            .SpawnX = 0
+            .SpawnY = 0
         End With
     End Sub
 
@@ -117,8 +126,71 @@ Module ModBDD
         Dim FluxFichier As Stream
         Dim Serialiseur As New BinaryFormatter
 
-        FluxFichier = File.Create("BDD/races/race" & racenum & ".wotg")
+        FluxFichier = File.Create("BDD/Races/Race" & racenum & ".wotg")
         Serialiseur.Serialize(FluxFichier, race(racenum))
+        FluxFichier.Close()
+    End Sub
+
+    ' - Chargemement d'une map
+    Public Sub Chargermap(ByVal mapnum As Integer)
+        Dim FluxFichier As Stream
+        Dim Deserialiseur As New BinaryFormatter
+
+        If File.Exists("BDD/Maps/Map" & mapnum & ".wotg") Then
+            FluxFichier = File.OpenRead("BDD/Maps/Map" & mapnum & ".wotg")
+            Map(mapnum) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)
+            FluxFichier.Close() : FluxFichier.Dispose()
+        Else
+            ' Call Nettoyermap(mapnum)
+            Call Sauvegardermap(mapnum)
+        End If
+    End Sub
+
+    ' - Nettoyage d'une map
+    Public Sub Nettoyermap(ByVal mapnum As Integer)
+        With Map(mapnum)
+            ReDim .Cases(MAX_MAPX, MAX_MAPY)
+            ReDim .PNJMap(MAX_MAP_PNJS)
+
+            For x = 0 To MAX_MAPX
+                For y = 0 To MAX_MAPY
+                    .Cases(x, y).Attribut = 0
+                    .Cases(x, y).SolSet = vbNullString
+                    .Cases(x, y).Sol = 0
+                    .Cases(x, y).Inf1Set = vbNullString
+                    .Cases(x, y).Inf1 = 0
+                    .Cases(x, y).Inf2Set = vbNullString
+                    .Cases(x, y).Inf2 = 0
+                    .Cases(x, y).Inf3Set = vbNullString
+                    .Cases(x, y).Inf3 = 0
+                    .Cases(x, y).Sup1Set = vbNullString
+                    .Cases(x, y).Sup1 = 0
+                    .Cases(x, y).Sup2Set = vbNullString
+                    .Cases(x, y).Sup2 = 0
+                    .Cases(x, y).Sup3Set = vbNullString
+                    .Cases(x, y).Sup3 = 0
+                Next
+            Next
+
+            .Nom = vbNullString
+            .Haut = 0
+            .Bas = 0
+            .Droite = 0
+            .Gauche = 0
+            .Continent = vbNullString
+            .Region = vbNullString
+            .Secteur = 0
+            .Type = 0
+        End With
+    End Sub
+
+    ' - Sauvegarde d'une map
+    Public Sub Sauvegardermap(ByVal mapnum As Integer)
+        Dim FluxFichier As Stream
+        Dim Serialiseur As New BinaryFormatter
+
+        FluxFichier = File.Create("BDD/Maps/Map" & mapnum & ".wotg")
+        Serialiseur.Serialize(FluxFichier, Map(mapnum))
         FluxFichier.Close()
     End Sub
 End Module

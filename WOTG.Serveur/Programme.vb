@@ -6,6 +6,7 @@
         ReDim JoueurTemp(MAX_JOUEURS)
         ReDim Classe(MAX_CLASSES)
         ReDim Race(MAX_RACES)
+        ReDim Map(MAX_MAPS)
 
         ' - Chargement du serveur
         Call MOTD()

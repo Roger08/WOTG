@@ -57,7 +57,7 @@ Module ModBDD
         Dim FluxFichier As Stream
         Dim Deserialiseur As New BinaryFormatter
 
-        Call NettoyerMap(mapnum)
+        'Call NettoyerMap(mapnum)
         If File.Exists("Maps/Map" & mapnum & ".wotg") Then
             FluxFichier = File.OpenRead("Maps/Map" & mapnum & ".wotg")
             Map(mapnum) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)

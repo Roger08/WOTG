@@ -24,6 +24,7 @@ Module ModVariables
     Public JoueurTemp() As JoueurTempRec
     Public Classe() As ClasseRec
     Public Race() As RaceRec
+    Public Map() As MapRec
 
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250
