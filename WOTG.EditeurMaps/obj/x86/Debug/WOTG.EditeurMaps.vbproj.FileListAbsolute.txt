@@ -19,3 +19,4 @@ C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurM
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurMaps.frmInformations.resources
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurMaps.frmSauvegardeMap.resources
 C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurMaps.frmRecherche.resources
+C:\Users\Hugo\Documents\GitHub\WOTG\WOTG.EditeurMaps\obj\x86\Debug\WOTG.EditeurMaps.frmProprietés.resources

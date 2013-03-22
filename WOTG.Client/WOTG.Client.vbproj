@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Modules\ModBDD.vb" />
     <Compile Include="Modules\ModEnum.vb" />
+    <Compile Include="Modules\ModFonctions.vb" />
     <Compile Include="Modules\ModJeu.vb" />
     <Compile Include="Modules\ModReseau.vb" />
     <Compile Include="Modules\ModVariables.vb" />

@@ -32,6 +32,7 @@ Module ModJeu
 
         ' Chargement du moteur de texte
         PoliceJeu = New Font("C:\Windows\Fonts\Arial.ttf")
+        MoteurTexte.Init()
 
         ' Mise en place des couches
         For i = 0 To 6
@@ -69,6 +70,7 @@ Module ModJeu
         ' Chargement des données binaires depuis FTP
 
         frmEditeur.tmrFPS.Enabled = True
+
         EnJeu = True
     End Sub
 
@@ -128,6 +130,10 @@ Module ModJeu
                     Call AfficherGrille()
                 End If
 
+                ' Affichage des informations
+                MoteurTexte.Dessiner("Map : " & Map(MapActuelle).Nom, Color.White, 14, 3, 5)
+                MoteurTexte.Dessiner("Connecté en tant que  : " & Joueur(MonIndex).Nom, Color.White, 12, 3, 38)
+
                 ' Affichage du tiles selectionné ou des attributs
                 If Not frmEditeur.lstTiles.Text = "Attributs" Then
                     Call AfficherPreviTiles()
@@ -146,7 +152,7 @@ Module ModJeu
 
             End If
 
-                Application.DoEvents()
+            Application.DoEvents()
         End While
 
         MsgBox("Connexion avec le serveur perdue ! Merci de le signaler à l'équipe du jeu.", MsgBoxStyle.Critical, "Erreur fatale")
@@ -289,3 +295,4 @@ Module ModJeu
 #End Region
 
 End Module
+

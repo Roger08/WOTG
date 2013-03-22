@@ -818,10 +818,20 @@
     End Sub
 
     Private Sub lstMaps_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstMaps.SelectedIndexChanged
-        Call ChargerMap(lstMaps.SelectedIndex)
+        If MsgBox("Voulez-vous vraiment changer de map ? Les modifications non enregistrées seront perdues", MsgBoxStyle.YesNo, "Attention") = MsgBoxResult.Yes Then
+            MapActuelle = lstMaps.SelectedIndex
+            Call ChargerMap(MapActuelle)
+            For i = 0 To 6
+                Call DessinerCouche(i)
+            Next
+        End If
     End Sub
 
     Private Sub RechercherToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RechercherToolStripMenuItem.Click
         frmRecherche.Show()
+    End Sub
+
+    Private Sub ProprietésToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProprietésToolStripMenuItem.Click
+        frmProprietés.Show()
     End Sub
 End Class

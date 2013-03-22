@@ -33,7 +33,7 @@ Module ModVariables
     Public imgTiles() As Texture
     Public sprtTiles As Sprite
     Public PoliceJeu As Font
-    Public Texte As Text
+    Public MoteurTexte As New clsMoteurTexte
     Public Canvas As New ShapeContainer
     Public RecSelect As New PowerPacks.RectangleShape
 

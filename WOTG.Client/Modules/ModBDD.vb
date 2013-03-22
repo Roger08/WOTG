@@ -38,4 +38,23 @@ Module ModBDD
             Call SauvegarderOptions()
         End If
     End Sub
+
+    ' - Charge une map enregistrée
+    Public Sub ChargerMap(ByVal mapnum As Integer)
+        Dim FluxFichier As Stream
+        Dim Deserialiseur As New BinaryFormatter
+
+        'Call NettoyerMap(mapnum)
+        If File.Exists("Maps/Map" & mapnum & ".wotg") Then
+            FluxFichier = File.OpenRead("Maps/Map" & mapnum & ".wotg")
+            Map(mapnum) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)
+            FluxFichier.Close() : FluxFichier.Dispose()
+        Else
+            'Call TelechargerMap(mapnum)
+            FluxFichier = File.OpenRead("Maps/Map" & mapnum & ".wotg")
+            Map(mapnum) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)
+            FluxFichier.Close() : FluxFichier.Dispose()
+        End If
+
+    End Sub
 End Module

@@ -438,6 +438,7 @@ Partial Class frmEditeur
         'ProprietésToolStripMenuItem
         '
         Me.ProprietésToolStripMenuItem.Name = "ProprietésToolStripMenuItem"
+        Me.ProprietésToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.ProprietésToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.ProprietésToolStripMenuItem.Text = "Proprietés"
         '
@@ -546,7 +547,7 @@ Partial Class frmEditeur
         '
         Me.GrilleToolStripMenuItem.Name = "GrilleToolStripMenuItem"
         Me.GrilleToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.G), System.Windows.Forms.Keys)
-        Me.GrilleToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.GrilleToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GrilleToolStripMenuItem.Text = "Grille"
         '
         'tmrFPS

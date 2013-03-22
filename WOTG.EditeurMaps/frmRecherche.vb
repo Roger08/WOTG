@@ -31,4 +31,14 @@
             Next
         End If
     End Sub
+
+    Private Sub lstMaps_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstMaps.SelectedIndexChanged
+        If MsgBox("Voulez-vous vraiment changer de map ? Les modifications non enregistrées seront perdues", MsgBoxStyle.YesNo, "Attention") = MsgBoxResult.Yes Then
+            MapActuelle = lstMaps.SelectedIndex
+            Call ChargerMap(MapActuelle)
+            For i = 0 To 6
+                Call DessinerCouche(i)
+            Next
+        End If
+    End Sub
 End Class

@@ -22,16 +22,30 @@ Partial Class frmJeu
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.PicJeu = New System.Windows.Forms.PictureBox()
+        CType(Me.PicJeu, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'PicJeu
+        '
+        Me.PicJeu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PicJeu.Location = New System.Drawing.Point(12, 12)
+        Me.PicJeu.Name = "PicJeu"
+        Me.PicJeu.Size = New System.Drawing.Size(608, 480)
+        Me.PicJeu.TabIndex = 0
+        Me.PicJeu.TabStop = False
         '
         'frmJeu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 262)
+        Me.ClientSize = New System.Drawing.Size(638, 510)
+        Me.Controls.Add(Me.PicJeu)
         Me.Name = "frmJeu"
         Me.Text = "frmJeu"
+        CType(Me.PicJeu, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
+    Friend WithEvents PicJeu As System.Windows.Forms.PictureBox
 End Class

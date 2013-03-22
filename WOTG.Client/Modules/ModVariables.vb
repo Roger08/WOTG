@@ -3,6 +3,8 @@ Imports System.Net.Sockets
 Imports System.IO
 Imports WOTG.Format.Structures
 Imports System.Collections
+Imports SFML.Window
+Imports SFML.Graphics
 
 Module ModVariables
 
@@ -19,6 +21,17 @@ Module ModVariables
     Public FIN As Char = Chr(237)
     Public ListeIndex As New ArrayList
     Public PaquetHandler As New Dictionary(Of Byte, Action(Of String))
+
+    ' - Variables Graphiques
+    Public FenetreRendu As RenderWindow
+    Public CoucheRendu(8, 6) As RenderTexture
+    Public CoucheGrille As RenderTexture
+    Public imgSprite As Texture
+    Public sprtSprite As Sprite
+    Public imgTiles() As Texture
+    Public sprtTiles As Sprite
+    Public PoliceJeu As Font
+    Public Texte As Text
 
     ' - Variables de structures
     Public Joueur() As JoueurRec
@@ -49,6 +62,9 @@ Module ModVariables
 
     ' - Variables diverses
     Public VersionClient As String = "0.0.1"
+    Public EnJeu As Boolean = False
+    Public MapActuelle As Integer
+    Public TotalTiles As Byte
 
 #Region "Strutures"
 

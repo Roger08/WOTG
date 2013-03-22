@@ -72,7 +72,7 @@ Module ModBDD
             Classe(classenum) = CType(Deserialiseur.Deserialize(FluxFichier), ClasseRec)
             FluxFichier.Close() : FluxFichier.Dispose()
         Else
-            ' Call NettoyerClasse(classenum)
+            Call NettoyerClasse(classenum)
             Call SauvegarderClasse(classenum)
         End If
     End Sub
@@ -105,7 +105,7 @@ Module ModBDD
             Race(racenum) = CType(Deserialiseur.Deserialize(FluxFichier), RaceRec)
             FluxFichier.Close() : FluxFichier.Dispose()
         Else
-            ' Call Nettoyerrace(racenum)
+            Call Nettoyerrace(racenum)
             Call Sauvegarderrace(racenum)
         End If
     End Sub
@@ -141,7 +141,7 @@ Module ModBDD
             Map(mapnum) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)
             FluxFichier.Close() : FluxFichier.Dispose()
         Else
-            ' Call Nettoyermap(mapnum)
+            Call Nettoyermap(mapnum)
             Call Sauvegardermap(mapnum)
         End If
     End Sub

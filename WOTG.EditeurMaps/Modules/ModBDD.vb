@@ -42,6 +42,7 @@ Module ModBDD
     ' - Charge le nom des maps
     Public Sub ChargerNomMaps()
         NomMap = File.ReadAllLines(Application.StartupPath & "/Maps/Maps.txt")
+        frmEditeur.lstMaps.Items.Clear()
 
         For i = 0 To MAX_MAPS
             If i < NomMap.Length Then
@@ -63,10 +64,10 @@ Module ModBDD
             Map(mapnum) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)
             FluxFichier.Close() : FluxFichier.Dispose()
         Else
-            'Call TelechargerMap(i)
-            'FluxFichier = File.OpenRead("Maps/Map" & i & ".wotg")
-            'Map(i) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)
-            'FluxFichier.Close() : FluxFichier.Dispose()
+            Call TelechargerMap(mapnum)
+            FluxFichier = File.OpenRead("Maps/Map" & mapnum & ".wotg")
+            Map(mapnum) = CType(Deserialiseur.Deserialize(FluxFichier), MapRec)
+            FluxFichier.Close() : FluxFichier.Dispose()
         End If
 
     End Sub
@@ -76,6 +77,7 @@ Module ModBDD
         If File.Exists("Maps/Map" & mapnum & ".wotg") Then
             File.Delete("Maps/Map" & mapnum & ".wotg")
         End If
+
         My.Computer.Network.DownloadFile("http://" & FTP & "/BDDWOTG/MapsEDITEUR/Map" & mapnum & ".wotg", "Maps/Map" & mapnum & ".wotg")
     End Sub
 
@@ -101,12 +103,21 @@ Module ModBDD
             MsgBox("Erreur lors de la sauvegarde...", MsgBoxStyle.Critical, "Erreur")
         End Try
 
-        ' --- Recharge le nom de la map ---
-        frmEditeur.lstMaps.Items.Clear()
-        For i = 1 To MAX_MAPS
-            frmEditeur.lstMaps.Items.Add(i & " : " & Map(i).Nom)
-            Application.DoEvents()
+        ' --- Sauvegarder puis recharge le nom de la map ---
+
+        Dim temp As String = vbNullString
+        For i = 0 To MAX_MAPS
+            If Not i = MapActuelle And i < NomMap.Length Then
+                temp = (temp & NomMap(i) & vbNewLine)
+            ElseIf i = MapActuelle Then
+                temp = (temp & Map(MapActuelle).Nom & vbNewLine)
+            Else
+                temp = (temp & vbNewLine)
+            End If
         Next
+        File.WriteAllText(Application.StartupPath & "/Maps/Maps.txt", temp)
+
+        Call ChargerNomMaps()
     End Sub
 
     ' - Nettoie la structure de la map
