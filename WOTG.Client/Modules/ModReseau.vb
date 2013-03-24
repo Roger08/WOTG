@@ -19,7 +19,12 @@ Module ModReseau
 
         ' Initialisation + connexion du socket
         _Socket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-        _Socket.Connect("localhost", Port)
+        Try
+            _Socket.Connect("localhost", Port)
+        Catch
+            MsgBox("Le serveur semble indisponible, veuillez vous reconnecter ultérieurement.", MsgBoxStyle.Critical, "Connexion impossible")
+            End
+        End Try
         _Flux = New NetworkStream(_Socket)
         Call Gameloop()
     End Sub

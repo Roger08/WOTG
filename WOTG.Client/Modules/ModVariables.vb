@@ -45,12 +45,13 @@ Module ModVariables
     Public Classe() As ClasseRec
     Public Race() As RaceRec
     Public Options As OptionsRec
+    Public Camera As CameraRec
 
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250
     Public MAX_MAPS As Integer = 500
-    Public MAX_MAPX As Byte = 30
-    Public MAX_MAPY As Byte = 30
+    Public MAX_MAPX As Byte = 19
+    Public MAX_MAPY As Byte = 15
     Public MAX_SECTEURS As Integer = 10
     Public MAX_OBJETS As Integer = 500
     Public MAX_SORTS As Integer = 500
@@ -73,6 +74,11 @@ Module ModVariables
         Dim Pseudo As String
         Dim MotDePasse As String
         Dim Memoriser As Boolean
+    End Structure
+
+    Public Structure CameraRec
+        Dim X As Short
+        Dim Y As Short
     End Structure
 #End Region
 End Module

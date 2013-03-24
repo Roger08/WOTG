@@ -103,8 +103,11 @@ Module ModJeu
 #Region "Dessin de la map"
     ' - Affichage de la couche
     Public Sub AfficherCouche(ByVal MapZone As Byte, ByVal couche As Byte)
+        Dim tmpSprite As Sprite
         CoucheRendu(MapZone, couche).Display()
-        FenetreRendu.Draw(New Sprite(CoucheRendu(MapZone, couche).Texture))
+        tmpSprite = New Sprite(CoucheRendu(MapZone, couche).Texture)
+        tmpSprite.Position = New Vector2f(Camera.X * 32, Camera.Y * 32)
+        FenetreRendu.Draw(tmpSprite)
     End Sub
 
     ' - Dessin (refresh) de la couche
