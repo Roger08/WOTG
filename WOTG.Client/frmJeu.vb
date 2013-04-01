@@ -11,20 +11,44 @@
         Select Case e.KeyCode
             Case Keys.Up
                 If Camera.Y < CInt(MAX_MAPY / 2) - 1 Then
-                    Camera.Y += 1
+                    With Joueur(MonIndex)
+                        If .Mouv = 0 Then
+                            .Dir = 3
+                            .Mouv = 32
+                            Camera.Y += 1
+                        End If
+                    End With
                 End If
             Case Keys.Down
                 If Camera.Y > CInt((-MAX_MAPY) / 2) + 1 Then
-                    Camera.Y -= 1
+                    With Joueur(MonIndex)
+                        If .Mouv = 0 Then
+                            .Dir = 0
+                            .Mouv = 32
+                            Camera.Y -= 1
+                        End If
+                    End With
                 End If
             Case Keys.Left
                 If Camera.X < CInt(MAX_MAPX / 2) - 1 Then
-                    Camera.X += 1
-                End If
+                    With Joueur(MonIndex)
+                        If .Mouv = 0 Then
+                            .Dir = 1
+                            .Mouv = 32
+                            Camera.X += 1
+                        End If
+                    End With
+                        End If
             Case Keys.Right
                 If Camera.X > CInt((-MAX_MAPX) / 2) + 1 Then
-                    Camera.X -= 1
-                End If
+                    With Joueur(MonIndex)
+                        If .Mouv = 0 Then
+                            .Dir = 2
+                            .Mouv = 32
+                            Camera.X -= 1
+                        End If
+                    End With
+                        End If
         End Select
     End Sub
 

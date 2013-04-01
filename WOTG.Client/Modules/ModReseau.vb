@@ -149,7 +149,10 @@ Module ModReseau
         Dim Data() As String = Datas.Split(SEP)
 
         Dim tempIndex As Byte = Data(1)
+        JoueurTemp(tempIndex).Connecte = True
+        JoueurTemp(tempIndex).EnJeu = True
         Joueur(tempIndex) = New WOTG.Format.Structures.JoueurRec
+        ListeIndex.Add(tempIndex)
 
         ' Téléchargement du joueur
         With Joueur(tempIndex)

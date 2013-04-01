@@ -85,6 +85,27 @@ Module ModJeu
                     Call AfficherCouche(4, i)
                 Next
 
+                ' - Affiche les joueurs
+                ' D'abbord l'ombre
+
+                '  Ensuite le bas
+                For i = 0 To ListeIndex.Count - 1
+                    If JoueurTemp(ListeIndex(i)).EnJeu Then
+                        If Joueur(ListeIndex(i)).Map = Joueur(MonIndex).Map Then
+                            Call AfficherBasJoueur(ListeIndex(i))
+                        End If
+                    End If
+                Next
+
+                ' Ensuite le haut
+                For i = 0 To ListeIndex.Count - 1
+                    If JoueurTemp(ListeIndex(i)).EnJeu Then
+                        If Joueur(ListeIndex(i)).Map = Joueur(MonIndex).Map Then
+                            Call AfficherHautJoueur(ListeIndex(i))
+                        End If
+                    End If
+                Next
+
                 ' Affichage des couches supérieures
                 For i = 4 To 6
                     Call AfficherCouche(4, i)
@@ -106,7 +127,18 @@ Module ModJeu
         Dim tmpSprite As Sprite
         CoucheRendu(MapZone, couche).Display()
         tmpSprite = New Sprite(CoucheRendu(MapZone, couche).Texture)
-        tmpSprite.Position = New Vector2f(Camera.X * 32, Camera.Y * 32)
+
+        Select Case Joueur(MonIndex).Dir
+            Case 0 ' Bas
+                tmpSprite.Position = New Vector2f(Camera.X * 32, Camera.Y * 32 + Joueur(MonIndex).Mouv)
+            Case 1 ' Gauche
+                tmpSprite.Position = New Vector2f(Camera.X * 32 - Joueur(MonIndex).Mouv, Camera.Y * 32)
+            Case 2 ' Droite
+                tmpSprite.Position = New Vector2f(Camera.X * 32 + Joueur(MonIndex).Mouv, Camera.Y * 32)
+            Case 3 ' Haut
+                tmpSprite.Position = New Vector2f(Camera.X * 32, Camera.Y * 32 - Joueur(MonIndex).Mouv)
+        End Select
+
         FenetreRendu.Draw(tmpSprite)
     End Sub
 
@@ -214,6 +246,46 @@ Module ModJeu
         CoucheRendu(Mapzone, Couche).Draw(sprtTiles)
         sprtTiles.Dispose()
 
+    End Sub
+#End Region
+
+#Region "Dessin des joueurs"
+    ' - Affiche le bas des joueurs
+    Public Sub AfficherBasJoueur(ByVal index As Byte)
+        With Joueur(index)
+            imgSprite = New Texture(Application.StartupPath & "/Graphique/Peaux/" & .Race + 1 & "x" & .Peau & ".png")
+            sprtSprite = New Sprite(imgSprite)
+            sprtSprite.TextureRect = New IntRect(0, 32, 32, 32)
+
+            If index = MonIndex Then
+                sprtSprite.Position = New Vector2f(9 * 32, 7 * 32)
+            Else
+                sprtSprite.Position = New Vector2f(.X * 32, .Y * 32)
+            End If
+
+            FenetreRendu.Draw(sprtSprite)
+            sprtSprite.Dispose()
+        End With
+    End Sub
+
+    ' - Affiche le haut des joueurs
+    Public Sub AfficherHautJoueur(ByVal index As Byte)
+        With Joueur(index)
+            imgSprite = New Texture(Application.StartupPath & "/Graphique/Peaux/" & .Race + 1 & "x" & .Peau & ".png")
+            sprtSprite = New Sprite(imgSprite)
+            sprtSprite.TextureRect = New IntRect(0, 0, 32, 32)
+
+            If index = MonIndex Then
+                sprtSprite.Position = New Vector2f(9 * 32, 6 * 32)
+            Else
+                sprtSprite.Position = New Vector2f(.X * 32, (.Y - 1) * 32)
+            End If
+
+            FenetreRendu.Draw(sprtSprite)
+            sprtSprite.Dispose()
+
+            If .Mouv > 0 Then .Mouv -= 4
+        End With
     End Sub
 #End Region
 End Module

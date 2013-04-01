@@ -131,8 +131,8 @@ Module ModJeu
                 End If
 
                 ' Affichage des informations
-                MoteurTexte.Dessiner("Map : " & Map(MapActuelle).Nom, Color.White, 14, 3, 5)
-                MoteurTexte.Dessiner("Connecté en tant que  : " & Joueur(MonIndex).Nom, Color.White, 12, 3, 38)
+                MoteurTexte.Dessiner("Map : " & Map(MapActuelle).Nom, Color.White, 14, 3, 5, Color.Black)
+                MoteurTexte.Dessiner("Connecté en tant que  : " & Joueur(MonIndex).Nom, Color.White, 12, 3, 38, Color.Black)
 
                 ' Affichage du tiles selectionné ou des attributs
                 If Not frmEditeur.lstTiles.Text = "Attributs" Then

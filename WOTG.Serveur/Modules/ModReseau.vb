@@ -170,7 +170,9 @@ Module ModReseau
                                 ' Envoie le joueur aux autres
                                 For i = 0 To ListeIndex.Count - 1
                                     If JoueurTemp(ListeIndex(i)).EnJeu Then
-                                        Call EnvoyerJoueur(ListeIndex(i), index)
+                                        If Not ListeIndex(i) = index Then
+                                            Call EnvoyerJoueur(ListeIndex(i), index)
+                                        End If
                                     End If
                                 Next
 

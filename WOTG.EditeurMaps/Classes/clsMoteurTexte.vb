@@ -9,7 +9,7 @@ Public Class clsMoteurTexte
         DessinTexte.Font = PoliceJeu
     End Sub
 
-    Sub Dessiner(ByVal Texte As String, ByVal Couleur As Color, ByVal Taille As Byte, ByVal X As Integer, ByVal Y As Integer)
+    Sub Dessiner(ByVal Texte As String, ByVal Couleur As Color, ByVal Taille As Byte, ByVal X As Integer, ByVal Y As Integer, ByVal CouleurContour As Color, Optional ByVal Contour As Boolean = False)
         DessinTexte.DisplayedString = Texte
         DessinTexte.Color = Couleur
         DessinTexte.CharacterSize = Taille
