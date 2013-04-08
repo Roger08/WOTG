@@ -255,7 +255,16 @@ Module ModJeu
         With Joueur(index)
             imgSprite = New Texture(Application.StartupPath & "/Graphique/Peaux/" & .Race + 1 & "x" & .Peau & ".png")
             sprtSprite = New Sprite(imgSprite)
-            sprtSprite.TextureRect = New IntRect(0, 32, 32, 32)
+
+            If .Mouv <= 2 Then
+                sprtSprite.TextureRect = New IntRect(0, .Dir * 64 + 32, 32, 32)
+            ElseIf .Mouv > 2 And .Mouv <= 12 Then
+                sprtSprite.TextureRect = New IntRect(32, .Dir * 64 + 32, 32, 32)
+            ElseIf .Mouv > 12 And .Mouv <= 22 Then
+                sprtSprite.TextureRect = New IntRect(64, .Dir * 64 + 32, 32, 32)
+            Else
+                sprtSprite.TextureRect = New IntRect(96, .Dir * 64 + 32, 32, 32)
+            End If
 
             If index = MonIndex Then
                 sprtSprite.Position = New Vector2f(9 * 32, 7 * 32)
@@ -273,7 +282,16 @@ Module ModJeu
         With Joueur(index)
             imgSprite = New Texture(Application.StartupPath & "/Graphique/Peaux/" & .Race + 1 & "x" & .Peau & ".png")
             sprtSprite = New Sprite(imgSprite)
-            sprtSprite.TextureRect = New IntRect(0, 0, 32, 32)
+
+            If .Mouv <= 2 Then
+                sprtSprite.TextureRect = New IntRect(0, .Dir * 64, 32, 32)
+            ElseIf .Mouv > 2 And .Mouv <= 12 Then
+                sprtSprite.TextureRect = New IntRect(32, .Dir * 64, 32, 32)
+            ElseIf .Mouv > 12 And .Mouv <= 22 Then
+                sprtSprite.TextureRect = New IntRect(64, .Dir * 64, 32, 32)
+            Else
+                sprtSprite.TextureRect = New IntRect(96, .Dir * 64, 32, 32)
+            End If
 
             If index = MonIndex Then
                 sprtSprite.Position = New Vector2f(9 * 32, 6 * 32)
