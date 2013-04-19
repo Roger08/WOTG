@@ -32,6 +32,7 @@ Module ModReseau
         PaquetHandler.Add(PaquetClient.CreationPersonnage, AddressOf CreationPersonnage)
         PaquetHandler.Add(PaquetClient.EConnexion, AddressOf ConnexionEditeur)
         PaquetHandler.Add(PaquetClient.EMSauvegarde, AddressOf ESauvegarderMap)
+        PaquetHandler.Add(PaquetClient.JoueurMouv, AddressOf Deplacementjoueur)
     End Sub
 
     ' - Accepte un client de manière asynchrone
@@ -328,6 +329,32 @@ Module ModReseau
             Call EnvoyerMauvaisMessage(index, "Le mot de passe de sauvegarde est incorrect !")
         End If
 
+    End Sub
+
+    ' - Déplacement d'un joueur
+    Public Sub Deplacementjoueur(ByVal index As Byte, ByVal Datas As String)
+        ' Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        ' Récupération du déplacement
+        Dim tmpMap As Integer = Data(1)
+        Dim tmpDir As Byte = Data(2)
+        Dim tmpX As Byte = Data(3)
+        Dim tmpY As Byte = Data(4)
+
+        ' Vérification du déplacement
+        ' TODO 
+
+        ' Envoie le déplacement aux autres
+        For i = 0 To ListeIndex.Count - 1
+            If JoueurTemp(ListeIndex(i)).EnJeu Then
+                If Joueur(ListeIndex(i)).Map = tmpMap Then
+                    If Not ListeIndex(i) = index Then
+                        Call EnvoyerPaquet(ListeIndex(i), PaquetServeur.RepJoueurMouv & SEP & index & SEP & tmpDir & SEP & tmpX & SEP & tmpY)
+                    End If
+                End If
+            End If
+        Next
     End Sub
 
 #End Region

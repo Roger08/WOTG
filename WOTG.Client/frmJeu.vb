@@ -10,45 +10,53 @@
     Private Sub frmJeu_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyCode
             Case Keys.Up
-                If Camera.Y < CInt(MAX_MAPY / 2) - 1 Then
+                If Joueur(MonIndex).Y > 0 Then
                     With Joueur(MonIndex)
                         If .Mouv = 0 Then
+                            .Y -= 1
                             .Dir = 3
                             .Mouv = 32
                             Camera.Y += 1
+                            Call EnvoyerDeplacement()
                         End If
                     End With
                 End If
             Case Keys.Down
-                If Camera.Y > CInt((-MAX_MAPY) / 2) + 1 Then
+                If Joueur(MonIndex).Y < MAX_MAPY Then
                     With Joueur(MonIndex)
                         If .Mouv = 0 Then
+                            .Y += 1
                             .Dir = 0
                             .Mouv = 32
                             Camera.Y -= 1
+                            Call EnvoyerDeplacement()
                         End If
                     End With
                 End If
             Case Keys.Left
-                If Camera.X < CInt(MAX_MAPX / 2) - 1 Then
+                If Joueur(MonIndex).X > 0 Then
                     With Joueur(MonIndex)
                         If .Mouv = 0 Then
+                            .X -= 1
                             .Dir = 1
                             .Mouv = 32
                             Camera.X += 1
+                            Call EnvoyerDeplacement()
                         End If
                     End With
-                        End If
+                End If
             Case Keys.Right
-                If Camera.X > CInt((-MAX_MAPX) / 2) + 1 Then
+                If Joueur(MonIndex).X < MAX_MAPX Then
                     With Joueur(MonIndex)
                         If .Mouv = 0 Then
+                            .X += 1
                             .Dir = 2
                             .Mouv = 32
                             Camera.X -= 1
+                            Call EnvoyerDeplacement()
                         End If
                     End With
-                        End If
+                End If
         End Select
     End Sub
 

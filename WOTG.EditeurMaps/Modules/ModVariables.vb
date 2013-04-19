@@ -53,8 +53,8 @@ Module ModVariables
     ' - Variables Max
     Public MAX_JOUEURS As Byte = 250
     Public MAX_MAPS As Integer = 500
-    Public MAX_MAPX As Byte = 19
-    Public MAX_MAPY As Byte = 15
+    Public MAX_MAPX As Byte = 18
+    Public MAX_MAPY As Byte = 14
     Public MAX_SECTEURS As Byte = 10
     Public MAX_OBJETS As Integer = 500
     Public MAX_SORTS As Integer = 500

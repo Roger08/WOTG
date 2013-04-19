@@ -8,6 +8,7 @@
         Connexion
         Inscription
         CreationPersonnage
+        JoueurMouv
     End Enum
 
     Public Enum PaquetServeur As Byte
@@ -18,5 +19,6 @@
         EnvoieRace
         EnvoieClasse
         RepEMSauvegarde
+        RepJoueurMouv
     End Enum
 End Module

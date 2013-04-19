@@ -15,7 +15,7 @@ Module ModJeu
         FenetreRendu.SetFramerateLimit(35)
 
         For i = 0 To 6
-            CoucheRendu(i) = New RenderTexture(MAX_MAPX * 32, MAX_MAPY * 32)
+            CoucheRendu(i) = New RenderTexture((MAX_MAPX + 1) * 32, (MAX_MAPY + 1) * 32)
         Next
 
         ReDim Map(MAX_MAPS)
@@ -40,7 +40,7 @@ Module ModJeu
         Next
 
         ' Dessin de la grille
-        CoucheGrille = New RenderTexture(MAX_MAPX * 32, MAX_MAPY * 32)
+        CoucheGrille = New RenderTexture((MAX_MAPX + 1) * 32, (MAX_MAPY + 1) * 32)
         CoucheGrille.Clear(New Color(0, 0, 0, 0))
         sprtTiles = New Sprite(imgTiles(TotalTiles))
         sprtTiles.TextureRect = New IntRect(0, 0, 32, 32)
@@ -176,7 +176,7 @@ Module ModJeu
         If Couche <= 3 Then
             For x = 0 To MAX_MAPX
                 For y = 0 To MAX_MAPY
-                    If Not x < 0 And Not x > 30 And Not y < 0 And Not y > 30 Then
+                    If Not x < 0 And Not x > MAX_MAPX And Not y < 0 And Not y > MAX_MAPY Then
                         With Map(MapActuelle).Cases(x, y)
 
                             If Couche = 0 Then
@@ -206,7 +206,7 @@ Module ModJeu
         ElseIf Couche >= 4 Then
             For x = 0 To MAX_MAPX
                 For y = 0 To MAX_MAPY
-                    If Not x < 0 And Not x > 30 And Not y < 0 And Not y > 30 Then
+                    If Not x < 0 And Not x > MAX_MAPX And Not y < 0 And Not y > MAX_MAPY Then
                         With Map(MapActuelle).Cases(x, y)
 
                             If Couche = 4 Then

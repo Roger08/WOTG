@@ -44,6 +44,7 @@ Module ModReseau
         PaquetHandler.Add(PaquetServeur.EnvoieJoueur, AddressOf RecevoirJoueur)
         PaquetHandler.Add(PaquetServeur.EnvoieRace, AddressOf RecevoirRace)
         PaquetHandler.Add(PaquetServeur.EnvoieClasse, AddressOf RecevoirClasse)
+        PaquetHandler.Add(PaquetServeur.RepJoueurMouv, AddressOf RecevoirDeplacementJoueur)
     End Sub
 
     ' - Deconnecte le client
@@ -194,6 +195,18 @@ Module ModReseau
 
     End Sub
 
+    ' - Récéption d'un déplacement
+    Public Sub RecevoirDeplacementJoueur(ByVal Datas As String)
+        ' - Récupère le corps du paquet
+        Dim Data() As String = Datas.Split(SEP)
+
+        With Joueur(Data(1))
+            .Dir = Data(2)
+            .X = Data(3)
+            .Y = Data(4)
+            .Mouv = 32
+        End With
+    End Sub
 #End Region
 
 #Region "Actions necessitant des paquets"
@@ -211,5 +224,11 @@ Module ModReseau
         End If
     End Sub
 
+    ' - Envoie du déplacement du joueur
+    Public Sub EnvoyerDeplacement()
+        With Joueur(MonIndex)
+            Call EnvoyerPaquet(PaquetClient.JoueurMouv & SEP & .Map & SEP & .Dir & SEP & .X & SEP & .Y)
+        End With
+    End Sub
 #End Region
 End Module

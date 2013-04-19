@@ -15,7 +15,7 @@ Module ModJeu
         FenetreRendu.SetFramerateLimit(35)
 
         For i = 0 To 6
-            CoucheRendu(4, i) = New RenderTexture(MAX_MAPX * 32, MAX_MAPY * 32)
+            CoucheRendu(4, i) = New RenderTexture((MAX_MAPX + 1) * 32, (MAX_MAPY + 1) * 32)
         Next
 
         ReDim Map(MAX_MAPS)
@@ -41,6 +41,10 @@ Module ModJeu
         ' Chargement des données binaires depuis FTP
 
         ' frmEditeur.tmrFPS.Enabled = True
+
+        ' Positionne la caméra
+        Camera.X = Joueur(MonIndex).X - MAX_MAPX / 2
+        Camera.Y = Joueur(MonIndex).Y - MAX_MAPY / 2
 
         EnJeu = True
     End Sub
@@ -130,13 +134,13 @@ Module ModJeu
 
         Select Case Joueur(MonIndex).Dir
             Case 0 ' Bas
-                tmpSprite.Position = New Vector2f(Camera.X * 32, Camera.Y * 32 + Joueur(MonIndex).Mouv)
+                tmpSprite.Position = New Vector2f((Camera.X + MAX_MAPX) * 32, (Camera.Y + MAX_MAPY) * 32 + Joueur(MonIndex).Mouv)
             Case 1 ' Gauche
-                tmpSprite.Position = New Vector2f(Camera.X * 32 - Joueur(MonIndex).Mouv, Camera.Y * 32)
+                tmpSprite.Position = New Vector2f((Camera.X + MAX_MAPX) * 32 - Joueur(MonIndex).Mouv, (Camera.Y + MAX_MAPY) * 32)
             Case 2 ' Droite
-                tmpSprite.Position = New Vector2f(Camera.X * 32 + Joueur(MonIndex).Mouv, Camera.Y * 32)
+                tmpSprite.Position = New Vector2f((Camera.X + MAX_MAPX) * 32 + Joueur(MonIndex).Mouv, (Camera.Y + MAX_MAPY) * 32)
             Case 3 ' Haut
-                tmpSprite.Position = New Vector2f(Camera.X * 32, Camera.Y * 32 - Joueur(MonIndex).Mouv)
+                tmpSprite.Position = New Vector2f((Camera.X + MAX_MAPX) * 32, (Camera.Y + MAX_MAPY) * 32 - Joueur(MonIndex).Mouv)
         End Select
 
         FenetreRendu.Draw(tmpSprite)
@@ -151,7 +155,7 @@ Module ModJeu
         If Couche <= 3 Then
             For x = 0 To MAX_MAPX
                 For y = 0 To MAX_MAPY
-                    If Not x < 0 And Not x > 30 And Not y < 0 And Not y > 30 Then
+                    If Not x < 0 And Not x > MAX_MAPX And Not y < 0 And Not y > MAX_MAPY Then
                         With Map(MapActuelle).Cases(x, y)
 
                             If Couche = 0 Then
@@ -181,7 +185,7 @@ Module ModJeu
         ElseIf Couche >= 4 Then
             For x = 0 To MAX_MAPX
                 For y = 0 To MAX_MAPY
-                    If Not x < 0 And Not x > 30 And Not y < 0 And Not y > 30 Then
+                    If Not x < 0 And Not x > MAX_MAPX And Not y < 0 And Not y > MAX_MAPY Then
                         With Map(MapActuelle).Cases(x, y)
 
                             If Couche = 4 Then

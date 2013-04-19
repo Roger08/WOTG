@@ -8,6 +8,7 @@
         Connexion
         Inscription
         CreationPersonnage
+        JoueurMouv
         ' Paquets éditeurs
         EConnexion
         EMSauvegarde
@@ -21,5 +22,6 @@
         EnvoieRace
         EnvoieClasse
         RepEMSauvegarde
+        RepJoueurMouv
     End Enum
 End Module
