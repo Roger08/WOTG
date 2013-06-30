@@ -91,6 +91,13 @@ Module ModJeu
 
                 ' - Affiche les joueurs
                 ' D'abbord l'ombre
+                For i = 0 To ListeIndex.Count - 1
+                    If JoueurTemp(ListeIndex(i)).EnJeu Then
+                        If Joueur(ListeIndex(i)).Map = Joueur(MonIndex).Map Then
+                            Call AfficherOmbreJoueur(ListeIndex(i))
+                        End If
+                    End If
+                Next
 
                 '  Ensuite le bas
                 For i = 0 To ListeIndex.Count - 1
@@ -101,7 +108,7 @@ Module ModJeu
                     End If
                 Next
 
-                ' Ensuite le haut
+                ' Enfin le haut
                 For i = 0 To ListeIndex.Count - 1
                     If JoueurTemp(ListeIndex(i)).EnJeu Then
                         If Joueur(ListeIndex(i)).Map = Joueur(MonIndex).Map Then
@@ -302,6 +309,38 @@ Module ModJeu
             Else
                 sprtSprite.Position = New Vector2f(.X * 32, (.Y - 1) * 32)
             End If
+
+            FenetreRendu.Draw(sprtSprite)
+            sprtSprite.Dispose()
+
+            If .Mouv > 0 Then .Mouv -= 4
+        End With
+    End Sub
+
+    ' - Affiche l'ombre des joueurs
+    Public Sub AfficherOmbreJoueur(ByVal index As Byte)
+        With Joueur(index)
+            imgSprite = New Texture(Application.StartupPath & "/Graphique/Peaux/" & .Race + 1 & "x" & .Peau & ".png")
+            sprtSprite = New Sprite(imgSprite)
+
+            If .Mouv <= 2 Then
+                sprtSprite.TextureRect = New IntRect(0, .Dir * 64, 32, 64)
+            ElseIf .Mouv > 2 And .Mouv <= 12 Then
+                sprtSprite.TextureRect = New IntRect(32, .Dir * 64, 32, 64)
+            ElseIf .Mouv > 12 And .Mouv <= 22 Then
+                sprtSprite.TextureRect = New IntRect(64, .Dir * 64, 32, 64)
+            Else
+                sprtSprite.TextureRect = New IntRect(96, .Dir * 64, 32, 64)
+            End If
+
+            If index = MonIndex Then
+                sprtSprite.Position = New Vector2f(10 * 32 + 2, 6 * 32 - 2)
+            Else
+                sprtSprite.Position = New Vector2f((.X + 1) * 32 + 2, (.Y - 1) * 32 - 2)
+            End If
+
+            sprtSprite.Color = New Color(0, 0, 0, 160)
+            sprtSprite.Rotation() = 45
 
             FenetreRendu.Draw(sprtSprite)
             sprtSprite.Dispose()
